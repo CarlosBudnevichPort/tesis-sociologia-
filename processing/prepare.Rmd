@@ -1,0 +1,69 @@
+---
+title: "Procesamiento de datos"
+---
+
+getwd()
+# Librerías
+
+install.packages("pacman")
+library(pacman)
+
+```{r}
+pacman::p_load(dplyr, sjmisc, car, sjlabelled, stargazer, foreign, haven)
+```
+
+options(scipen=999) #evitar notación científica
+
+
+#Carga de datos
+
+#Base de datos alumnos
+
+base_alumnos<- read_dta("../input/data/original/simce2m2017_alu_publica_final.dta")
+
+#Base de datos apoderados
+
+base_padres<- read_dta("../input/data/original/simce2m2017_cpad_publica.dta")
+
+#Base datos establecimientos
+
+base_colegios<- read_dta("../input/data/original/simce2m2017_rbd_publica_final.dta")
+
+#Seleccionar variables
+
+base_padres=base_padres %>% select(idalumno, rbd, cpad_p06, cpad_p07, cpad_p08_01, cpad_p08_02, cpad_p08_03, cpad_p09_01, cpad_p09_02, cpad_p09_03, cpad_p10) %>% as.data.frame()
+
+#base con variables de interés
+
+dim(base_padres)
+
+#names of variables
+
+names(base_padres)
+
+#obtener las etiquetas de las variables
+
+sjlabelled :: get_label(base_padres)
+
+frq(base_padres$cpad_p09_01)
+
+frq(base_padres$cpad_p08_03)
+
+
+
+
+
+
+
+
+
+# Información de la sesión
+
+```{r}
+print(paste("R", getRversion()))
+print("*** Versiones de librerías")
+for (package_name in sort(loadedNamespaces())) {
+    print(paste(package_name, packageVersion(package_name)))
+}
+
+```
