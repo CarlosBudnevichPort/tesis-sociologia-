@@ -359,7 +359,8 @@ La investigación utilizará datos cuantitativos provenientes de fuentes secunda
 Específicamente, son pruebas de conocimientos curriculares en varios subsectores en la cual no existe una escala estandarizada, sin embargo, para aspectos generales se considera una escala de un mínimo de 100 y un máximo de 400 puntos, con un promedio de 250 y una desviación estándar de 50 puntos. Además de la prueba de conocimientos curriculares, SIMCE recoge información de contexto a través de un cuestionario para los padres de los estudiantes testeados. Este cuestionario tiene como fin indagar sobre el nivel educacional de los padres, el ingreso del hogar, el nivel de satisfacción con el establecimiento, nacionalidad (tanto de padres/madres como alumnos), origen étnico (tanto de padres/madres como de alumnos), entre otros.
 
 Usaremos los datos correspondientes para los alumnos que rindieron la prueba en 2do Medio el año 2017. Es importante resaltar que los datos ya se encuentran a disposición para ser utilizados de modo que la realización de la investigación es completamente factible. La decisión de usar los datos SIMCE del año 2017 responde a la disponibilidad de los datos, pues si bien sería deseable usar datos más recientes, no tenemos acceso a ellos.
-La muestra de alumnos para SIMCE 2017 corresponde a 210.444 estudiantes distribuidos en 2912 establecimientos a nivel nacional. 
+
+Las dos fuentes de información usadas, esto es, el cuestionario de los padres y los datos sobre el puntaje de los estudiantes difieren en la cantidad de observaciones. Mientras esta última cuenta con información de 245.197 estudiantes que rindieron la prueba SIMCE, el cuestionario de los padres sólo logra cubrir a 169.824 estudiantes. Como consecuencia de lo anterior, se trabaja, en principio, con 169.824 observaciones. Luego de la limpieza de los datos y considerando los datos pérdidos la muestra con la cual realizamos los analisis es de 154.951 estudiantes distribuidos en 2912 establecimientos a nivel nacional.
 
 ##Variables 
 
@@ -368,13 +369,64 @@ Tabla 1: Variables independientes a nivel escuela
 ![](input/images/VI_escuela.jpg)
 
  
-Variables Dependientes: Puntaje obtenido en la Prueba SIMCE Matemática y Prueba SIMCE Lenguaje 2017  
+Tabla 2: Variables independientes a nivel individual  
 ![](input/images/VI_individual.jpg)
 
+Variables Dependientes: Puntaje obtenido en la Prueba SIMCE Matemática y Prueba SIMCE Lenguaje 2017
 
 ##Análisis 
 
 Se estimarán modelos lineales jerárquicos, más conocidos como modelos multinivel para examinar la relación entre las variables a nivel establecimiento escolar (nivel 2) y variables a nivel estudiante (nivel 1), con el puntaje en prueba SIMCE de Matemática y Lenguaje que muestran los estudiantes. La ventaja de este método de estimación radica en la posibilidad de descomponer la varianza de los puntajes de los alumnos entre escuelas, por un lado, y dentro de las escuelas por otro. Lo anterior es posible debido a que los métodos multinivel consideran la estructura anidada de los datos (en este caso alumnos que se encuentran anidados en establecimientos escolares). En ese mismo sentido, permite modelar independientemente la variabilidad en los distintos niveles de agregación y la interacción entre estos niveles.
+
+##Descripción de variables
+
+```{r, echo=FALSE, results='hide'}
+load("input/data/proc/data.RData")
+load("input/data/proc/data2.RData")
+
+#carga de paquetes
+pacman::p_load(dplyr, #Manipulacion de datos
+              stargazer, #Tablas
+              sjmisc, # Tablas
+              summarytools, # Tablas
+              kableExtra, #Tablas
+              sjPlot, #Tablas y gráficos
+              corrplot, # Correlaciones
+              sessioninfo,
+              webshot, # Información de la sesión de trabajo
+              lme4,
+              reghelper,
+              haven,
+              descr,
+              ggplot2, # gr?ficos
+              texreg) # tablas lme4
+               
+
+```
+
+
+```{r, echo=FALSE, results='asis'}
+print(dfSummary(data2, plain.ascii = FALSE, graph.magnif = 0.75, headings=FALSE), method="render")
+
+
+```
+
+Si observamos la tabla, contiene todas las variables a nivel estudiante que son de interés en este estudio. Respecto al sexo de los individuos, tenemos que hay casi la misma proporción de hombres y mujeres en la muestra considerada. Los ingresos del hogar, a su vez, utilizados para medir el nivel socioeconomico de los alumnos tiene 15 categorias diferentes, correspondientes cada una a tramos de ingreso que van desde  1=menos de $100.000 hasta 15= más de $2.000.000. Si prestamos atención a la distribución de esta variable, es posible advertir que la mayoría de los estudiantes tienen familias con ingresos bajos, concentandose entre los tramos 1 y 6, es decir, entre menos de $100.000 y $600.000. De hecho, la mediana de la variable equivale al tramo 5 de ingresos, por ende, las mitad de los individuos está bajo el tramo $400.000-$500.000.
+
+Por su parte, para medir el origen cultural de los estudiantes (considerando etnia y nacionalidad), generamos tres variables. Primeramente, la etnia y nacionalidad por separado de modo que podamos cuantificar la cantidad de estudiantes indigenas y migrantes que hay en la matricula secundaria a nivel nacional. Sólo 4.5% de la matricula es de una nacionalidad diferente a la chilena, mientras un 16.6% tiene origen índigena. 
+
+Para decidir si un estudiante era índigena o migrante se tomó como referencia al padre, la madre, y al estudiante mismo. Si se indicaba que uno de los tres era indigena o migrante se le imputaba origen etnico/migrante. Luego, para construir la variable composición cultural se consideró ambas variables siguiendo el mismo criterio: si los padres indicaban en al menos una de las seis preguntas en cuestión ser migrante o índigena se le imputaba un origen cultural diverso. Por esta razón, los estudiantes diversos culturalmente no se componen por la suma ordinaria de ambas variables, alcanzando un 20.4% de la matricula nacional.
+
+Ahora bien, si penetramos en las variables dependientes del estudio, tenemos un comportamiento de las variables algo diferente a las anteriores. En primer lugar, los resultados en matematica tienen una mayuor variabilidad que los puntajes en las otras dos pruebas. En efecto, hay un grupo importante de estudiantes que tienden a situarse en la parte más alta (o, si se quiere, más a la derecha si tenemos como eje las abcisas) de la distribución. Ateniendonos a los datos, la prueba de matematica es la que tiene una desviación estandar más alta entre las tres pruebas consideradas (63.4 vs 51.1 en lenguaje y 48.8 en historia). Este dato nos indica que hay una mayor desigualdad en los puntajes de matematica que en las otras pruebas, asunto que intentaremos explicar más adelante a partir de ciertos atributos sociales tanto de los individuos como del conjunto agregado a nivel del establecimiento. Acerca de los valores mínimos y máximos observados en cada prueba no hay diferencias significativamente grandes. En matematicas el mínimo observado es de 96.6 y el máximo de 428 puntos, en la prueba de lenguaje el mínimo 116.8 y el máximo de 397.3, mientras en historias el rango es más estrecho pues el menor puntaje observado data de 147.5 y el máximo de 402.3.
+
+Por último, la variable nivel educacional data de 18 categorías donde cada valor representa los años de estudio alcanzados exceptuando las últimas categorías. Para su construcción se utilizó el máximo nivel educacional obtenido entre el padre y la madre del estudiante.
+
+Desde el 0 al 13 son los años de estudio donde el 13 representa a aquellos estudiantes donde el nivel educacional máximo por alguno de sus padres es haber terminado el colegio con un año adicional para un titulo técnico "abreviado". Por otro lado, la categoría 14 representa a aquellos que tienen educación técnica completa, el 15 a quienes terminaron la Universidad, el 16 a quienes alcanzaron el grado de magister, y 17 el grado academico de doctor. Cabe destacar que al menos mitad de los estudiantes provienen de familias en las cuales no se alcanzó a terminar al colegio (mediana=12). Asimismo, la cantidad de estudiantes que tienen padres con el grado de doctor o magister es muy bajo si observamos el histograma de la variable. 
+
+En último término, cabe consignar que se tomó la decisión de no recodificar ingreso y nivel educacional como categoricas en virtud del foco que tiene el estudio en evaluar el impacto de la heterogeneidad social en el rendimiento. Si trataramos estas dos variables como categoricas perderiamos mucha variabilidad de cada una de ellas dejando de capturar la real magnitud del impacto que tiene en el rendimiento academico de los estudiantes. 
+```{r, echo=FALSE, results='asis'}
+stargazer(data, title = "Descriptivos", type ='text')
+```
 
 #Bibliografía
 

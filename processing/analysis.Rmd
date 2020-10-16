@@ -1,0 +1,38 @@
+##Carga de paquetes
+pacman::p_load(dplyr, #Manipulacion de datos
+              stargazer, #Tablas
+              sjmisc, # Tablas
+              summarytools, # Tablas
+              kableExtra, #Tablas
+              sjPlot, #Tablas y gráficos
+              corrplot, # Correlaciones
+              sessioninfo,
+              webshot) # Información de la sesión de trabajo
+              
+options(scipen=999) #evitar notación científica
+              
+##Carga de datos 
+
+load("input/data/proc/data.RData")
+
+#Exploración inicial datos
+
+names(data)
+
+dim(data)
+
+data= round(data,digits=2)
+data2= data %>% select(sexo,ingresos, puntaje_mate, puntaje_leng, puntaje_hist, cultura, educacion)
+data2$rbd=NULL
+data2$sexo=set_label(x=data2$sexo, label= "Sexo")
+
+##generamos tabla descrptiva con summary tools 
+
+dfSummary(data2, plain.ascii = FALSE)
+
+view(dfSummary(data2, headings=FALSE))
+
+
+save(dfSummary, file= "output/images/descriptivos.html")
+
+##para variables nivel 2 usamos tabla stargazer

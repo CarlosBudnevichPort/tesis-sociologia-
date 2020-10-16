@@ -2,12 +2,8 @@
 title: "Procesamiento de datos"
 ---
 
-getwd()
 
 # Librerías
-
-install.packages("pacman")
-library(pacman)
 
 
 ```{r}
@@ -19,375 +15,241 @@ options(scipen=999) #evitar notación científica
 
 #Carga de datos
 
-#Base de datos alumnos
-
-alumnos<- read_dta("../input/data/original/simce2m2017_alu_publica_final.dta")
 
 #Base de datos apoderados
 
-padres<- read_dta("../input/data/original/simce2m2017_cpad_publica.dta")
+padres<- read_dta("input/data/original/simce2m2017_cpad_publica.dta")
 
+alumnos<- read_dta("input/data/original/simce2m2017_alu_publica_final.dta")
+
+##Unimos ambas bases de datos para simplificar trabajo
+
+proc=merge(padres, alumnos, by="idalumno")
 
 #Seleccionar variables
 
-padres_proc=padres %>% select(idalumno, rbd, cpad_p06, cpad_p07, cpad_p08_01, cpad_p08_02, cpad_p08_03, cpad_p09_01, cpad_p09_02, cpad_p09_03, cpad_p10) %>% as.data.frame()
-
-#base con variables de interés
-
-dim(padres_proc)
-
-#names of variables
-
-names(padres_proc)
-
-#Ahora Procesaremos cada variable de interés del cuestionario a los padres  
-
-#para ver cantidad de padres que responden cuestionario y posteriormente IDALUMNO nos permitira unir esta base con aquella que contiene puntajes SIMCE
-frq(padres_proc$idalumno)
-
-#digito verificador de establecimientos RBD. Vemos cuantos alumnos hay por escuela
-frq(padres_proc$rbd)
-
-#NIVEL SOCIOECONOMICO
-##Usaremos el ingreso bruto del hogar por tramo para medir NSE
-
-frq(padres_proc$cpad_p10)
-
-## valor 99 (doble marca) y 0 (vacío) los damos como pérdidos.
-padres_proc$cpad_p10<- recode(padres_proc$cpad_p10, "c(99, 0)=NA")
-
-##Renombramos variable
-
-padres_proc <- padres_proc %>%  rename("ingresos"=cpad_p10)
-
-##Vemos etiqueta de la variable y cambiamos de ser necesario
-get_label(padres_proc$ingresos)
-
-padres_proc$ingresos <- set_label(x = padres_proc$ingresos, label="Ingresos hogar")
-
-padres_proc$ingresos <- set_labels(x = padres_proc$ingresos, labels=c("Menos de $ 100.000"=1, "Entre $ 100.001 y $ 200.000"=2, "Entre $ 200.001 y $ 300.000"=3, "Entre $ 300.001 y $ 400.000"=4, "Entre $ 400.001 y $ 500.000"=5, "Entre $ 500.001 y $ 600.000"=6, "Entre $ 600.001 y $ 800.000"=7, "Entre $ 800.001 y $ 1.000.000"=8, "Entre $ 1.000.001 y $ 1.200.000"=9, "Entre $ 1.200.001 y $ 1.400.000"=10, "Entre $ 1.400.001 y $ 1.600.000"=11, "Entre $ 1.600.001 y $ 1.800.000"=12, "Entre $ 1.800.001 y $ 2.000.000"=13, "Entre $ 2.000.001 y $ 2.200.000"=14, "Más de $ 2.200.000"=15))
-
-##Chequeamos con un nuevo descriptivo los cambios realizados 
-frq(padres_proc$ingresos)
-
-#ETNIA
-
-##etnia del padre estudiante
-frq(padres_proc$cpad_p08_01)
-
-## valor 99 (doble marca) y 0 (vacío) los damos como pérdidos. Además dejamos valor 1 como indegena y valor 0 como no indigena
-
-padres_proc$cpad_p08_01<- recode(padres_proc$cpad_p08_01, "c(99, 0)=NA")
-padres_proc$cpad_p08_01<- car:: recode(padres_proc$cpad_p08_01, "2=0")
-
-##Renombramos variable
-
-padres_proc <- padres_proc %>%  rename("etnia_padre"=cpad_p08_01)
-
-##Vemos etiqueta y cambiamos de ser necesario
-
-get_label(padres_proc$etnia_padre)
-
-padres_proc$etnia_padre <- set_label(x = padres_proc$etnia_padre, label="Etnia padre")
-padres_proc$etnia_padre <- set_labels(x = padres_proc$etnia_padre, labels=c("Indígena"=1, "No Indígena"=0))
-
-##verificamos cambios
-
-frq(padres_proc$etnia_padre)
-
-##Etnia Madre del estudiante 
-
-frq(padres_proc$cpad_p08_02)
-
-## valor 99 (doble marca) y 0 (vacío) los damos como pérdidos. Además dejamos valor 1 como indegena y valor 0 como no indigena
-
-padres_proc$cpad_p08_02<- recode(padres_proc$cpad_p08_02, "c(99, 0)=NA")
-padres_proc$cpad_p08_02<- car:: recode(padres_proc$cpad_p08_02, "2=0")
-
-##Renombramos variable
-
-padres_proc <- padres_proc %>%  rename("etnia_madre"=cpad_p08_02)
-
-##Vemos etiqueta y cambiamos de ser necesario
-
-get_label(padres_proc$etnia_madre)
-
-padres_proc$etnia_madre <- set_label(x = padres_proc$etnia_madre, label="Etnia madre")
-padres_proc$etnia_madre <- set_labels(x = padres_proc$etnia_madre, labels=c("Indígena"=1, "No Indígena"=0))
-
-##verificamos cambios
-
-frq(padres_proc$etnia_madre)
-
-##ETNIA ESTUDIANTE
-
-frq(padres_proc$cpad_p08_03)
-
-## valor 99 (doble marca) y 0 (vacío) los damos como pérdidos. Además dejamos valor 1 como indegena y valor 0 como no indigena
-
-padres_proc$cpad_p08_03<- recode(padres_proc$cpad_p08_03, "c(99, 0)=NA")
-padres_proc$cpad_p08_03<- car:: recode(padres_proc$cpad_p08_03, "2=0")
-
-##Renombramos variable
-
-padres_proc <- padres_proc %>%  rename("etnia_estudiante"=cpad_p08_03)
-
-##Vemos etiqueta y cambiamos de ser necesario
-
-get_label(padres_proc$etnia_estudiante)
-
-padres_proc$etnia_estudiante <- set_label(x = padres_proc$etnia_estudiante, label="Etnia estudiante")
-padres_proc$etnia_estudiante <- set_labels(x = padres_proc$etnia_estudiante, labels=c("Indígena"=1, "No Indígena"=0))
-
-##verificamos cambios
-
-frq(padres_proc$etnia_estudiante)
-
-##VARIABLE AGREGADA ETNIA A PARTIR DE TRES VARIABLES ANTERIORES: 
-
-padres_proc$etnia<-padres_proc$etnia_estudiante + padres_proc$etnia_madre + padres_proc$etnia_padre
-
-frq(padres_proc$etnia)
-
-## si el valor es mayor a 0 significa que o el padre o la madre o el estudiante (como minimo) es índigena. Entonces los valores 1, 2 y 3 los recodificaremos como 1 representando a los estudiantes de origen indigena
-
-padres_proc$etnia<- car:: recode(padres_proc$etnia, "2=1;3=1")
-
-padres_proc$etnia <- set_label(x = padres_proc$etnia, label="Etnia")
-
-
-#NACIONALIDAD
-
-##NACIONALIDAD PADRE
-## descriptivo nacionalidad del padre, siendo 1=chileno, 2=migrante no LA, 3=migrante LA, 0 vacio y 99 doble marca
-frq(padres_proc$cpad_p09_01)
-
-## valor 99 (doble marca) y 0 (vacío) los damos como pérdidos. Además dejamos valor 1 como migrante (unimos ambas cat de migrantes pq n es muy bajo) y 0 como no migrante
-
-padres_proc$cpad_p09_01<- recode(padres_proc$cpad_p09_01, "c(99, 0)=NA")
-padres_proc$cpad_p09_01<- car:: recode(padres_proc$cpad_p09_01, "2=1;3=1;1=0")
-
-##Renombramos variable
-
-padres_proc <- padres_proc %>%  rename("pais_padre"=cpad_p09_01)
-
-##Vemos etiqueta y cambiamos de ser necesario
-
-get_label(padres_proc$pais_padre)
-
-padres_proc$pais_padre <- set_label(x = padres_proc$pais_padre, label="País padre")
-padres_proc$pais_padre <- set_labels(x = padres_proc$pais_padre, labels=c("Migrante"=1, "No migrante"=0))
-
-##verificamos cambios
-
-frq(padres_proc$pais_padre)
-
-##NACIONALIDAD MADRE
-## descriptivo nacionalidad de la madre, siendo 1=chilena, 2=migrante no LA, 3=migrante LA, 0 vacio y 99 doble marca
-frq(padres_proc$cpad_p09_02)
-
-## valor 99 (doble marca) y 0 (vacío) los damos como pérdidos. Además dejamos valor 1 como migrante (unimos ambas cat de migrantes pq n es muy bajo) y 0 como no migrante
-
-padres_proc$cpad_p09_02<- recode(padres_proc$cpad_p09_02, "c(99, 0)=NA")
-padres_proc$cpad_p09_02<- car:: recode(padres_proc$cpad_p09_02, "2=1;3=1;1=0")
-
-##Renombramos variable
-
-padres_proc <- padres_proc %>%  rename("pais_madre"=cpad_p09_02)
-
-##Vemos etiqueta y cambiamos de ser necesario
-
-get_label(padres_proc$pais_madre)
-
-padres_proc$pais_madre <- set_label(x = padres_proc$pais_madre, label="País madre")
-padres_proc$pais_madre <- set_labels(x = padres_proc$pais_madre, labels=c("Migrante"=1, "No migrante"=0))
-
-##verificamos cambios
-
-frq(padres_proc$pais_madre)
-
-##NACIONALIDAD ESTUDIANTE 
-
-## descriptivo nacionalidad del estudiante, siendo 1=chilena, 2=migrante no LA, 3=migrante LA, 0 vacio y 99 doble marca
-frq(padres_proc$cpad_p09_03)
-
-## valor 99 (doble marca) y 0 (vacío) los damos como pérdidos. Además dejamos valor 1 como migrante (unimos ambas cat de migrantes pq n es muy bajo) y 0 como no migrante
-
-padres_proc$cpad_p09_03<- recode(padres_proc$cpad_p09_03, "c(99, 0)=NA")
-padres_proc$cpad_p09_03<- car:: recode(padres_proc$cpad_p09_03, "2=1;3=1;1=0")
-
-##Renombramos variable
-
-padres_proc <- padres_proc %>%  rename("pais_estudiante"=cpad_p09_03)
-
-##Vemos etiqueta y cambiamos de ser necesario
-
-get_label(padres_proc$pais_estudiante)
-
-padres_proc$pais_estudiante <- set_label(x = padres_proc$pais_estudiante, label="País estudiante")
-
-padres_proc$pais_estudiante <- set_labels(x = padres_proc$pais_estudiante, labels=c("Migrante"=1, "No migrante"=0))
-
-##verificamos cambios
-
-frq(padres_proc$pais_estudiante)
-
-#CREAREMOS NUEVA VARIABLE DE NACIONALIDAD A PARTIR DE LAS TRES ANTERIORES SIGUIENDO EL MISMO CRITERIO USADO PARA ETNIA
-## si el valor es mayor a 0 significa que o el padre o la madre o el estudiante (como minimo) es índigena. Entonces los valores 1, 2 y 3 los recodificaremos como 1 representando a los estudiantes de origen indigena
-
-padres_proc$pais<-padres_proc$pais_estudiante + padres_proc$pais_madre + padres_proc$pais_padre
-
-frq(padres_proc$pais)
-
-## si el valor es mayor a 0 significa que o el padre o la madre o el estudiante (como minimo) es migrante. Entonces los valores 1, 2 y 3 los recodificaremos como 1 representando a los estudiantes de origen migrante
-
-padres_proc$pais<- car:: recode(padres_proc$pais, "2=1;3=1")
-
-padres_proc$pais <- set_label(x = padres_proc$pais, label="Nacionalidad")
-
-##POR ULTIMO, crearemos variable de composición cultural, considerando etnia y nacionalidad simultaneamente. El procedimiento será el mismo.  
-
-padres_proc$cultura<-padres_proc$etnia + padres_proc$pais
-
-frq(padres_proc$cultura)
-
-##Si el valor resultante de la suma de ambas variables es 1  significa que (i) es indigena o (ii) es migrante y si el valor es 2 cumple ambas condiciones. Recodificaremos valor 1 y 2 como alguien que es "diverso culturalmente" al cumplir al menos una de las dos condiciones
-
-padres_proc$cultura<- car:: recode(padres_proc$cultura, "2=1")
-
-padres_proc$cultura <- set_label(x = padres_proc$cultura, label="Cultura")
-
-padres_proc$cultura <- set_labels(x = padres_proc$cultura, labels=c("Diverso culturalmente"=1, "No diverso culturalmente"=0))
-
-
-#Ahora nos falta variable género y puntajes SIMCE, todas variables en base alumnos. Luego uniremos ambas bases con los datos limpiados y necesarios para los analisis
-
-alumnos<- read_dta("../input/data/original/simce2m2017_alu_publica_final.dta")
-
-##Seleccionamos variables de interés
-
-#Seleccionar variables
-
-alumnos_proc=alumnos %>% select(idalumno, rbd, ptje_lect2m_alu, 
+proc=proc %>% select(idalumno, rbd.x, cpad_p06, cpad_p07, cpad_p08_01, cpad_p08_02, cpad_p08_03, cpad_p09_01, cpad_p09_02, cpad_p09_03, cpad_p10, ptje_lect2m_alu, 
 ptje_mate2m_alu, ptje_soc2m_alu, gen_alu) %>% as.data.frame()
 
-#base con variables de interés
+proc<- proc %>% rename("rbd"=rbd.x) 
 
-dim(alumnos_proc)
+#NSE
+frq(proc$cpad_p10)
 
-#names of variables
+proc$cpad_p10<- recode(proc$cpad_p10, "c(99, 0)=NA")
 
-names(alumnos_proc)
+proc <- proc %>%  rename("ingresos"=cpad_p10)
+proc$ingresos <- set_label(x = proc$ingresos, label="Ingresos hogar")
 
-#Ahora Procesaremos cada variable de interés del cuestionario a los padres  
+proc$ingresos <- set_labels(x = proc$ingresos, labels=c("Menos de $ 100.000"=1, "Entre $ 100.001 y $ 200.000"=2, "Entre $ 200.001 y $ 300.000"=3, "Entre $ 300.001 y $ 400.000"=4, "Entre $ 400.001 y $ 500.000"=5, "Entre $ 500.001 y $ 600.000"=6, "Entre $ 600.001 y $ 800.000"=7, "Entre $ 800.001 y $ 1.000.000"=8, "Entre $ 1.000.001 y $ 1.200.000"=9, "Entre $ 1.200.001 y $ 1.400.000"=10, "Entre $ 1.400.001 y $ 1.600.000"=11, "Entre $ 1.600.001 y $ 1.800.000"=12, "Entre $ 1.800.001 y $ 2.000.000"=13, "Entre $ 2.000.001 y $ 2.200.000"=14, "Más de $ 2.200.000"=15))
+
+##Chequeamos con un nuevo descriptivo los cambios realizados 
+frq(proc$ingresos)
+
+##Nivel eduacional
+
+frq(proc$cpad_p07)
+
+frq(proc$cpad_p06)
+
+proc$cpad_p07= recode(proc$cpad_p07, "c(21,99)=0")
+
+proc$cpad_p06= recode(proc$cpad_p06, "c(21,99)=0")
+
+
+##nueva variable con maximo nivel ed. alcanzado por mapadres
+
+proc$educacion<- ifelse(proc$cpad_p07>proc$cpad_p06, proc$cpad_p07, proc$cpad_p06)
+    
+frq(proc$educacion)
+
+proc$educacion<- recode(proc$educacion, "0=NA; 15=13; 17=13; 16=15;18=16; 19=17; 20=18")
+
+proc$educacion=set_label(x=proc$educacion, label="Nivel educativo")
+
+proc$educacion= (proc$educacion)-1
+##Etnia
+frq(proc$cpad_p08_01)
+frq(proc$cpad_p08_02)
+frq(proc$cpad_p08_03)
+
+##vamos a recodificar teniendo a la vista que 1= indigena, 2= no indigena, 99= perdido. Si en al menos una de las tres variables marca 1, diremos que es indigena, en cambio marcara 2 cuando en ninguna de las tres variables marque 1 y en al menos 1 de ellas marque 2. Por ultimo,  solo en caso de que en las tres variables sea 99 lo dejaremos como 99  
+##etnia estudiante
+proc$cpad_p08_03<- recode(proc$cpad_p08_03, "0=99")
+##etnia madre
+proc$cpad_p08_02<- recode(proc$cpad_p08_02, "0=99")
+
+##etnia padre
+proc$cpad_p08_01<- recode(proc$cpad_p08_01, "0=99")
+
+##nueva variable agregada con tres anteriores
+
+proc$etnia<-proc$cpad_p08_01 + proc$cpad_p08_02 + proc$cpad_p08_03
+
+frq(proc$etnia)
+
+proc$etnia<- car:: recode(proc$etnia, "c(3,4,5,199,101,102)=1; c(6,103,200)=0; 297=2")
+
+proc$etnia <- set_label(x = proc$etnia, label="Etnia")
+
+proc$etnia <- set_labels(x = proc$etnia, labels=c("Indígena"=1, "No Indígena"=0, "Missings"=2))
+
+##Nacionalidad
+frq(proc$cpad_p09_01)
+frq(proc$cpad_p09_02)
+frq(proc$cpad_p09_03)
+
+
+##vamos a recodificar en 1=migrante, 2= no migrante y 99 todos los missings siguiendo lo realizado con etnia. repetiremos el procedimiento
+##nacionalidad estudiante
+proc$cpad_p09_03<- recode(proc$cpad_p09_03, "c(99, 0)=99; 1=2; c(2,3)=1")
+
+##nacionalidad madre
+proc$cpad_p09_02<- recode(proc$cpad_p09_02, "c(99, 0)=99; 1=2; c(2,3)=1")
+
+##nacionalidad padre
+proc$cpad_p09_01<- recode(proc$cpad_p09_01, "c(99, 0)=99; 1=2; c(2,3)=1")
+
+
+##nueva variable agregada con tres anteriores
+
+proc$nacionalidad<-proc$cpad_p09_01 + proc$cpad_p09_02 + proc$cpad_p09_03
+
+frq(proc$nacionalidad)
+
+proc$nacionalidad<- recode(proc$nacionalidad, "c(3,4,5,199,101,102)=1; c(6,103,200)=0; 297=2")
+
+proc$nacionalidad <- set_label(x = proc$nacionalidad, label="Nacionalidad")
+
+proc$nacionalidad <- set_labels(x = proc$nacionalidad, labels=c("Migrante"=1, "No migrante"=0, "Missings"=2))
+
+##composicion cultural
+##POR ULTIMO, crearemos variable de composición cultural, considerando etnia y nacionalidad simultaneamente. El procedimiento será el mismo.  1=diverso culturalmente, 2=no diverso culturalmente y 99=missings
+##vamos a crear nacionalidad y etnia con NA's para posterior creacion de composicion cultural
+proc$nac<- recode(proc$nacionalidad, "2=99; 0=2")
+proc$etn<-recode(proc$etnia, "2=99; 0=2")
+
+proc$cultura<-proc$etn + proc$nac
+
+frq(proc$cultura)
+
+proc$cultura<- car:: recode(proc$cultura, "c(2,3,100)=1; c(4,101)=0; 198=2")
+
+proc$cultura <- set_label(x = proc$cultura, label="Cultura")
+
+proc$cultura <- set_labels(x = proc$cultura, labels=c("Diverso culturalmente"=1, "No diverso culturalmente"=0, "Missings"=2))
+
+frq(proc$cultura)
+
+##GÉNERO
+frq(proc$gen_alu)
+
+##Recodificamos género
+
+proc$gen_alu<- car::recode(proc$gen_alu, "1=0; 2=1")
+
+proc$gen_alu <- set_labels(proc$gen_alu,
+            labels=c( "Hombre"=0,
+                      "Mujer"=1))
+                      
+#Tambien cambiamos nombre de la variable
+proc <- rename(proc, "sexo"=gen_alu)
+
+##Obtenemos etiqueta de la variable y luego la modificamos
+
+get_label(proc$sexo)
+
+proc$sexo <- set_label(x = proc$sexo, label="Sexo")
+
+##Revisamos con un nuevo descriptivo
+frq(proc$sexo)
+
+
 
 ##exploramos nuestras variables dependientes (puntajes SIMCE)
 
 ##PUNTAJE LENGUAJE 
 
-summary(alumnos_proc$ptje_lect2m_alu)
+summary(proc$ptje_lect2m_alu)
 
-##vemos que los NA ya vienen codificados así que no es necesario cambiar las categorías
+proc <- proc %>%  rename("puntaje_leng"=ptje_lect2m_alu)
 
-##renombraremos la variable
-
-alumnos_proc <- alumnos_proc %>%  rename("puntaje_leng"=ptje_lect2m_alu)
-
-##vemos etiqueta de la variable
-get_label(alumnos_proc$puntaje_leng)
-
-alumnos_proc$puntaje_leng <- set_label(x = alumnos_proc$puntaje_leng, label="Puntaje Lenguaje")
+proc$puntaje_leng <- set_label(x = proc$puntaje_leng, label="Puntaje Lenguaje")
 
 ##PUNTAJE MATEMATICA
 
-summary(alumnos_proc$ptje_mate2m_alu)
+summary(proc$ptje_mate2m_alu)
 
-##vemos que los NA ya vienen codificados así que no es necesario cambiar las categorías
+proc <- proc %>%  rename("puntaje_mate"=ptje_mate2m_alu)
 
-##renombraremos la variable
-
-alumnos_proc <- alumnos_proc %>%  rename("puntaje_mate"=ptje_mate2m_alu)
-
-##vemos etiqueta de la variable
-get_label(alumnos_proc$puntaje_mate)
-
-alumnos_proc$puntaje_mate <- set_label(x = alumnos_proc$puntaje_mate, label="Puntaje Matemática")
-
+proc$puntaje_mate <- set_label(x = proc$puntaje_mate, label="Puntaje Matemática")
 
 ##PUNTAJE HISTORIA 
 
-summary(alumnos_proc$ptje_soc2m_alu)
+summary(proc$ptje_soc2m_alu)
 
-##vemos que los NA ya vienen codificados así que no es necesario cambiar las categorías
+proc <- proc %>%  rename("puntaje_hist"=ptje_soc2m_alu)
 
-##renombraremos la variable
+proc$puntaje_hist <- set_label(x = proc$puntaje_hist, label="Puntaje Historia")
 
-alumnos_proc <- alumnos_proc %>%  rename("puntaje_hist"=ptje_soc2m_alu)
+summary(proc$puntaje_hist)
 
-##vemos etiqueta de la variable
-get_label(alumnos_proc$puntaje_hist)
+##sacamos variables que no usaremos y luego eliminamos los casos perdidos
 
-alumnos_proc$puntaje_hist <- set_label(x = alumnos_proc$puntaje_hist, label="Puntaje Historia")
+data= proc %>% select(rbd, puntaje_leng, puntaje_mate, puntaje_hist, ingresos, sexo, cultura, educacion, nacionalidad, etnia)
 
+data= na.omit(data)
 
-##GÉNERO
-frq(alumnos_proc$gen_alu)
+data <-sjlabelled::copy_labels(data,proc)
 
-##Recodificamos género
+stargazer(data, type="text")
 
-alumnos_proc$gen_alu<- car::recode(alumnos_proc$gen_alu, "1=0; 2=1")
+##variables nivel 2 
 
-alumnos_proc$gen_alu <- set_labels(alumnos_proc$gen_alu,
-            labels=c( "Hombre"=0,
-                      "Mujer"=1))
-                      
-#Tambien cambiamos nombre de la variable
-alumnos_proc <- rename(alumnos_proc, "sexo"=gen_alu)
+data <- data %>%
+  group_by(rbd) %>%
+  mutate(m_ingresos = mean(ingresos))
+  
+data <- data %>%
+  group_by(rbd) %>%
+  mutate(sd_ingresos = sd(ingresos))
 
-##Obtenemos etiqueta de la variable y luego la modificamos
+data <- data %>%
+  group_by(rbd) %>%
+  mutate(num_mujeres = mean(sexo==1))
+  
+data <- data %>%
+  group_by(rbd) %>%
+  mutate(div_cultura = mean(cultura==1))
+  
+data <- data %>%
+  group_by(rbd) %>%
+  mutate(p_nacionalidad = mean(nacionalidad==1))
 
-get_label(alumnos_proc$sexo)
+data <- data %>%
+  group_by(rbd) %>%
+  mutate(p_etnia = mean(etnia==1))
 
-alumnos_proc$sexo <- set_label(x = alumnos_proc$sexo, label="Sexo")
+data <- data %>%
+  group_by(rbd) %>%
+  mutate(m_educacion = mean(educacion))
+  
+data <- data %>%
+  group_by(rbd) %>%
+  mutate(sd_educacion = sd(educacion))
 
-##Revisamos con un nuevo descriptivo
-frq(alumnos_proc$sexo)
+##base con solos variables individuales 
+data= round(data,digits=2)
+data$sexo=set_label(x=data$sexo, label="Sexo")
 
+data2= data %>% select(sexo,ingresos, puntaje_mate, puntaje_leng, puntaje_hist, cultura, educacion, nacionalidad, etnia)
 
+data2$rbd=NULL
 
-##Unimos ambas bases de datos procesadas 
+data2$sexo=set_label(x=data2$sexo, label= "Sexo")
 
-proc<- merge(padres_proc, alumnos_proc, by="idalumno")
-proc
-
-stargazer(proc, type="text")
-
-
-proc$rbd.y <- NULL
-proc$cpad_p06<-NULL
-proc$cpad_p07<-NULL
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+save(data, file="input/data/proc/data.RData")
+save(data2, file="input/data/proc/data2.RData")
 # Información de la sesión
 
 ```{r}
