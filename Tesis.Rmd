@@ -360,7 +360,7 @@ Específicamente, son pruebas de conocimientos curriculares en varios subsectore
 
 Usaremos los datos correspondientes para los alumnos que rindieron la prueba en 2do Medio el año 2017. Es importante resaltar que los datos ya se encuentran a disposición para ser utilizados de modo que la realización de la investigación es completamente factible. La decisión de usar los datos SIMCE del año 2017 responde a la disponibilidad de los datos, pues si bien sería deseable usar datos más recientes, no tenemos acceso a ellos.
 
-Las dos fuentes de información usadas, esto es, el cuestionario de los padres y los datos sobre el puntaje de los estudiantes difieren en la cantidad de observaciones. Mientras esta última cuenta con información de 245.197 estudiantes que rindieron la prueba SIMCE, el cuestionario de los padres sólo logra cubrir a 169.824 estudiantes. Como consecuencia de lo anterior, se trabaja, en principio, con 169.824 observaciones. Luego de la limpieza de los datos y considerando los datos pérdidos la muestra con la cual realizamos los analisis es de 154.951 estudiantes distribuidos en 2912 establecimientos a nivel nacional.
+Las dos fuentes de información usadas, esto es, el cuestionario de los padres y los datos sobre el puntaje de los estudiantes difieren en la cantidad de observaciones. Mientras esta última cuenta con información de 245.197 estudiantes que rindieron la prueba SIMCE, el cuestionario de los padres sólo logra cubrir a 169.824 estudiantes. Como consecuencia de lo anterior, se trabaja, en principio, con 169.824 observaciones. Luego de la limpieza de los datos y considerando los datos pérdidos la muestra con la cual realizamos los analisis es de 147.979 estudiantes distribuidos en 2901 establecimientos a nivel nacional.
 
 ##Variables 
 
@@ -382,51 +382,257 @@ Se estimarán modelos lineales jerárquicos, más conocidos como modelos multini
 
 ```{r, echo=FALSE, results='hide'}
 load("input/data/proc/data.RData")
-load("input/data/proc/data2.RData")
+load("input/data/proc/data_agg.RData")
 
 #carga de paquetes
 pacman::p_load(dplyr, #Manipulacion de datos
               stargazer, #Tablas
-              sjmisc, # Tablas
-              summarytools, # Tablas
-              kableExtra, #Tablas
-              sjPlot, #Tablas y gráficos
-              corrplot, # Correlaciones
+              sjmisc, 
+              summarytools, 
+              kableExtra, 
+              sjPlot, 
+              corrplot, 
               sessioninfo,
-              webshot, # Información de la sesión de trabajo
+              webshot, 
               lme4,
               reghelper,
               haven,
               descr,
-              ggplot2, # gr?ficos
-              texreg) # tablas lme4
+              ggplot2, 
+              texreg,
+              lm.beta,
+              sjlabelled,
+              plyr) 
                
 
 ```
 
-
 ```{r, echo=FALSE, results='asis'}
-print(dfSummary(data2, plain.ascii = FALSE, graph.magnif = 0.75, headings=FALSE), method="render")
+stargazer(data, title = "Descriptivos nivel estudiante", type='html', digits = 3)
 
 
 ```
+
+
+
+```{r, echo=FALSE, results='asis'}
+print(dfSummary(data, plain.ascii = FALSE, graph.magnif = 0.75, headings=FALSE), method="render")
+
+
+```
+###Variables nivel estudiante
 
 Si observamos la tabla, contiene todas las variables a nivel estudiante que son de interés en este estudio. Respecto al sexo de los individuos, tenemos que hay casi la misma proporción de hombres y mujeres en la muestra considerada. Los ingresos del hogar, a su vez, utilizados para medir el nivel socioeconomico de los alumnos tiene 15 categorias diferentes, correspondientes cada una a tramos de ingreso que van desde  1=menos de $100.000 hasta 15= más de $2.000.000. Si prestamos atención a la distribución de esta variable, es posible advertir que la mayoría de los estudiantes tienen familias con ingresos bajos, concentandose entre los tramos 1 y 6, es decir, entre menos de $100.000 y $600.000. De hecho, la mediana de la variable equivale al tramo 5 de ingresos, por ende, las mitad de los individuos está bajo el tramo $400.000-$500.000.
 
-Por su parte, para medir el origen cultural de los estudiantes (considerando etnia y nacionalidad), generamos tres variables. Primeramente, la etnia y nacionalidad por separado de modo que podamos cuantificar la cantidad de estudiantes indigenas y migrantes que hay en la matricula secundaria a nivel nacional. Sólo 4.5% de la matricula es de una nacionalidad diferente a la chilena, mientras un 16.6% tiene origen índigena. 
+Por su parte, para medir el origen cultural de los estudiantes (considerando etnia y nacionalidad), generamos tres variables. Primeramente, la etnia y nacionalidad por separado de modo que podamos cuantificar la cantidad de estudiantes indigenas y migrantes que hay en la matricula secundaria a nivel nacional. Sólo 4.5% de la matricula es de una nacionalidad diferente a la chilena, mientras un 16.6% tiene origen índigena. Cabe relevar que para la nacionalidad y etnia (por lo tanto, también para variable cultura), los casos pérdidos se codificaron con la categoría "2" que la clasificamos como "missing". La razón de ello estriba en la importancia de no perder más observaciones adicionales a aquellas fruto de la limpieza de datos. 
 
 Para decidir si un estudiante era índigena o migrante se tomó como referencia al padre, la madre, y al estudiante mismo. Si se indicaba que uno de los tres era indigena o migrante se le imputaba origen etnico/migrante. Luego, para construir la variable composición cultural se consideró ambas variables siguiendo el mismo criterio: si los padres indicaban en al menos una de las seis preguntas en cuestión ser migrante o índigena se le imputaba un origen cultural diverso. Por esta razón, los estudiantes diversos culturalmente no se componen por la suma ordinaria de ambas variables, alcanzando un 20.4% de la matricula nacional.
 
-Ahora bien, si penetramos en las variables dependientes del estudio, tenemos un comportamiento de las variables algo diferente a las anteriores. En primer lugar, los resultados en matematica tienen una mayuor variabilidad que los puntajes en las otras dos pruebas. En efecto, hay un grupo importante de estudiantes que tienden a situarse en la parte más alta (o, si se quiere, más a la derecha si tenemos como eje las abcisas) de la distribución. Ateniendonos a los datos, la prueba de matematica es la que tiene una desviación estandar más alta entre las tres pruebas consideradas (63.4 vs 51.1 en lenguaje y 48.8 en historia). Este dato nos indica que hay una mayor desigualdad en los puntajes de matematica que en las otras pruebas, asunto que intentaremos explicar más adelante a partir de ciertos atributos sociales tanto de los individuos como del conjunto agregado a nivel del establecimiento. Acerca de los valores mínimos y máximos observados en cada prueba no hay diferencias significativamente grandes. En matematicas el mínimo observado es de 96.6 y el máximo de 428 puntos, en la prueba de lenguaje el mínimo 116.8 y el máximo de 397.3, mientras en historias el rango es más estrecho pues el menor puntaje observado data de 147.5 y el máximo de 402.3.
+Ahora bien, si penetramos en las variables dependientes del estudio, tenemos un comportamiento de las variables algo diferente a las anteriores. En primer lugar, los resultados en matematica tienen una mayor variabilidad que los puntajes en las otras dos pruebas. En efecto, hay un grupo importante de estudiantes que tienden a situarse en la parte más alta (o, si se quiere, más a la derecha si tenemos como eje las abcisas) de la distribución. Ateniendonos a los datos, la prueba de matematica es la que tiene una desviación estandar más alta entre las tres pruebas consideradas (63.4 vs 51.1 en lenguaje y 48.8 en historia). Este dato nos indica que hay una mayor desigualdad en los puntajes de matematica que en las otras pruebas, asunto que intentaremos explicar más adelante a partir de ciertos atributos sociales tanto de los individuos como del conjunto agregado a nivel del establecimiento. Acerca de los valores mínimos y máximos observados en cada prueba no hay diferencias significativamente grandes. En matematicas el mínimo observado es de 96.6 y el máximo de 428 puntos, en la prueba de lenguaje el mínimo 116.8 y el máximo de 397.3, mientras en historias el rango es más estrecho pues el menor puntaje observado data de 147.5 y el máximo de 402.3.
 
 Por último, la variable nivel educacional data de 18 categorías donde cada valor representa los años de estudio alcanzados exceptuando las últimas categorías. Para su construcción se utilizó el máximo nivel educacional obtenido entre el padre y la madre del estudiante.
 
-Desde el 0 al 13 son los años de estudio donde el 13 representa a aquellos estudiantes donde el nivel educacional máximo por alguno de sus padres es haber terminado el colegio con un año adicional para un titulo técnico "abreviado". Por otro lado, la categoría 14 representa a aquellos que tienen educación técnica completa, el 15 a quienes terminaron la Universidad, el 16 a quienes alcanzaron el grado de magister, y 17 el grado academico de doctor. Cabe destacar que al menos mitad de los estudiantes provienen de familias en las cuales no se alcanzó a terminar al colegio (mediana=12). Asimismo, la cantidad de estudiantes que tienen padres con el grado de doctor o magister es muy bajo si observamos el histograma de la variable. 
+Desde el 0 al 13 son los años de estudio donde el 0 indica ningún año de estudio y el 13 representa a aquellos estudiantes donde el nivel educacional máximo por alguno de sus padres es haber terminado el colegio con un año adicional para un titulo técnico "abreviado". Por otro lado, la categoría 14 representa a aquellos que tienen educación técnica completa, el 15 a quienes terminaron la Universidad, el 16 a quienes alcanzaron el grado de magister, y 17 el grado academico de doctor. Cabe destacar que al menos la mitad de los estudiantes provienen de familias en las cuales no se alcanzó a terminar el colegio (mediana=12). Asimismo, la cantidad de estudiantes que tienen padres con el grado de doctor o magister es muy bajo si observamos el histograma de la variable. 
 
 En último término, cabe consignar que se tomó la decisión de no recodificar ingreso y nivel educacional como categoricas en virtud del foco que tiene el estudio en evaluar el impacto de la heterogeneidad social en el rendimiento. Si trataramos estas dos variables como categoricas perderiamos mucha variabilidad de cada una de ellas dejando de capturar la real magnitud del impacto que tiene en el rendimiento academico de los estudiantes. 
+
+##Variables nivel establecimiento escolar
+
 ```{r, echo=FALSE, results='asis'}
-stargazer(data, title = "Descriptivos", type ='text')
+data_agg_d= data %>% group_by(rbd) %>% summarise_all(funs(mean)) %>% as.data.frame()
+
+stargazer(data_agg_d, title= "Descriptivos de establecimientos", type = 'html')
 ```
+
+
+
+Cabe destacar algunos datos que nos proporciona la tabla descriptiva que resume las variables a nivel establecimiento escolar. Uno de los datos que más llama la atención es que no existe ningún establecimiento escolar que se componga, en su totalidad, de estudiantes de origen migrante (el máximo valor alcanzado es de un 74%). Haciendo hincapié en cómo se distribuyen los porcentajes de migrantes en el sistema escolar, notamos que un 75% de las escuelas tiene un 6% o menos de estudiantes de otra nacionalidad dando cuenta de la poca cantidad de migrantes que participan del sistema educacional chileno.
+
+Por otro lado, es interesante mencionar que, contrario a lo que ocurre con la nacionalidad, sí existen establecimientos con la totalidad de los estudiantes pertenecientes a alguna etnia, reflejado en que el valor máximo de la variable "p_etnia" es igual a 1. En cuanto a la proporción de establecimientos escolares que alojan estudiantes indigenas es posible advertir que un 25% de los colegios se compone de una matricula en la que un 20% o más de los alumnos pertenecen a alguna etnia.
+
+Como el foco de esta investigación es la relación entre las diferentes dimensiones de la heterogeneidad social y el rendimiento academico, para cada una de ellas se resolvió una forma diferente de medir dicha heterogeneidad. Para el caso de la variable ingresos, que es tratada como cuantitativa, se utiliza la desviación estándar de cada uno de los establecimientos. La desviación estandar es una buena medida de heterogeneidad en la medida que calcula la dispersión de los datos y, de esa forma, cuánto se alejan en promedio cada uno de los datos de la media. Así, un colegio que tenga una mayor desviación estándar tendrá una mayor dispersión en lo que refiere a los ingresos de los estudiantes y, por lo tanto, será más heterogéneo. Debido al cáracter de las otras variables con las cuales se quiere medir heterogeneidad (cultural, étnica, y de género) procedimos a elaborar otra forma de medirla.
+
+Por otra parte, en el caso de las variables dicotómicas sexo, etnia, y nacionalidad se construyeron perfiles de establecimientos a partir del método de "Jenks". Este modo de clasificar o agrupar una variable consiste en la creación de categorías a partir de determinada variable siguiendo un criterio de minimización de la varianza al interior de cada una de esas categorías o grupos y la maximización entre ellas. En consecuencia, el algoritmo optimizará (formará los tramos óptimos para cada categoría) bajo las dos restricciones mencionadas. La virtud de este metodo radica en que no requiere de segundas variables para la creación de las categorías en aquella(s) de interés.
+
+Antes de aplicar el algoritmo de Jenks, se calculó, por cada establecimiento, la proporción de mujeres, índigenas, y migrantes. Luego, con esa información clasificamos a cada una de las tres variables mencionadas según tres categorías o grupos: Homogeneos con alta cantidad de estudiantes de la categoría de referencia, homogeneos con baja cantidad de estudiantes de la categoría de referencia y, por último, heterogeneos que se componen de una cantidad equilibrada de ambas categorías. Veamos con más detalle el puntaje de corte establecido para cada una de las categorías y, luego, según esos puntajes, la distribución porcentual de los establecimientos según cada una de las variables de interés.
+
+Tabla 3: Puntajes de corte para cada variable a partir del método de Jenks
+
+![](input/images/puntajes_de_corte.png)
+
+Fuente: Elaboración propia
+
+Tabla 4: Distribución porcentual de establecimientos según grado de heterogeneidad
+
+![](input/images/distribucion_establecimientos.png)
+
+Fuente: Elaboración propia
+
+Con la información presente en las tablas, podemos advertir con precisión, primero, el rango de porcentajes para poder determinar si cierta proporción de mujeres/indígenas/migrantes en el aula representa un colegio homogéneo bajo, heterogéneo, u homogéneo alto en la categoría social correspondiente. Entonces, por ejemplo, un establecimiento que aloja un 20% de mujeres sería clasificado como homogéneo bajo (en términos de género) y un establecimiento con el mismo porcentaje de migrantes sería catalogado como heterogéneo (en términos "migratorios"). 
+
+Ahora bien, la distribución porcentual según cada variable difere significativamente por cada atributo social considerado. Mientras en el caso del sexo de los estudiantes un 74,7% del total de establecimientos (que totalizan, en términos absolutos, 2901 como vimos en los descriptivos) es heterogéneo relativo al género de los estudiantes, sólo un 19,9% lo es en relación a la nacionalidad de los alumnos. 
+
+##Correlaciones 
+
+```{r, echo=FALSE, results='hide'}
+cormat= data %>% select(ingresos, educacion, puntaje_mate, puntaje_leng) %>% cor()
+round(cormat, digits=2)
+
+
+
+```
+
+```{r, echo=FALSE, results='asis'}
+corrplot.mixed(cormat)
+
+```
+
+El gráfico de correlaciones entre variables cuantitativas a nivel estudiante (ingresos, puntajes SIMCE, y educación) da cuenta de una asociación alta entre, por un lado, ingreso y educación y, por otro lado, los puntajes en la prueba SIMCE, particularmente la de Matemática. En ese caso, las correlaciones son del orden de 0.35 para el caso de ingresos y 0.36 con la variable educación. Mientras, la correlación entre estas dos variables cuantitativas y el puntaje en lenguaje es más baja que la observada en matemáticas, alcanzando el valor de 0.23 para ingresos y 0.26 para educación. A su vez, se puede apreciar una leve diferencia en favor de la variable educación.
+
+Las correlaciones entre las dos variables independientes cuantitativas a nivel estudiante no es lo suficientemente alta como para poder establecer que están midiendo lo mismo. En consecuencia, está empiricamente justificado la inclusión de ambas variables en el modelo por separado.
+
+
+
+
+#Modelos 
+
+
+
+```{r, echo=FALSE, results='hide'}
+
+data_agg$m_ingresos= (data_agg$m_ingresos)/10000
+data_agg$sd_ingresos=(data_agg$sd_ingresos)/10000
+
+
+data_agg= round(data_agg, digits = 2)
+
+data_agg$sexo_j = ifelse(data_agg$num_mujeres<=0.39, "homogeneo bajo", ifelse((data_agg$num_mujeres>0.39) & (data_agg$num_mujeres<=0.72), "heterogeneo", "homogeneo alto")) 
+
+data_agg$sexo_j= as_factor(data_agg$sexo_j)
+
+data_agg$cultura_j = ifelse(data_agg$div_cultura<=0.19, "homogeneo bajo", ifelse((data_agg$div_cultura>0.20) & (data_agg$div_cultura<=0.44), "heterogeneo", "homogeneo alto")) 
+
+data_agg$cultura_j= as_factor(data_agg$cultura_j)
+
+data_agg$nacionalidad_j = ifelse(data_agg$p_nacionalidad<0.07, "homogeneo bajo", ifelse((data_agg$p_nacionalidad>=0.07) & (data_agg$p_nacionalidad<=0.23), "heterogeneo", "homogeneo alto")) 
+
+data_agg$nacionalidad_j= as_factor(data_agg$nacionalidad_j)
+
+data_agg$etnia_j = ifelse(data_agg$p_etnia<=0.16, "homogeneo bajo", ifelse((data_agg$p_etnia>0.16) & (data_agg$p_etnia<=0.41), "heterogeneo", "homogeneo alto")) 
+
+data_agg$etnia_j= as_factor(data_agg$etnia_j)
+
+
+
+
+```
+
+
+```{r, echo=FALSE, results='hide'}
+
+##modelo individual, grupal, y multinivel para matematica
+##individual
+results_1 = lmer(puntaje_mate ~ 1 + log(ingresos) + sexo + educacion + nacionalidad + etnia + (1|rbd), data = data)
+screenreg(results_1)
+
+
+## grupal
+results_2= lmer(puntaje_mate ~ 1 + m_ingresos + sd_educacion + sd_ingresos + m_educacion + nacionalidad_j + etnia_j + sexo_j + (1|rbd), data=data_agg)
+
+screenreg(results_2)
+
+##multinivel
+results_3 = lmer(puntaje_mate ~ 1 + log(ingresos) + sexo + educacion + nacionalidad + etnia + sd_ingresos + m_educacion + sd_educacion + m_ingresos + nacionalidad_j + etnia_j + sexo_j + (1|rbd), data = data_agg)
+
+screenreg(results_3)
+
+
+##---------------------------------------------------
+  
+  screenreg(list(results_1, results_2, results_3))
+
+
+
+```
+
+```{r, echo=FALSE, results='hide'}
+
+##modelo individual, grupal, y multinivel para lenguaje
+##individual
+results_4 = lmer(puntaje_leng ~ 1 + log(ingresos) + sexo + educacion + nacionalidad + etnia + (1|rbd), data = data)
+screenreg(results_4, naive=TRUE)
+
+
+## grupal
+results_5= lmer(puntaje_leng ~ 1 + m_ingresos + sd_educacion + sd_ingresos + m_educacion + nacionalidad_j + etnia_j + sexo_j + (1|rbd), data=data_agg)
+
+screenreg(results_5)
+
+##multinivel
+results_6 = lmer(puntaje_leng ~ 1 + log(ingresos) + sexo + educacion + nacionalidad + etnia + sd_ingresos + m_educacion + sd_educacion + m_ingresos + nacionalidad_j + etnia_j + sexo_j + (1|rbd), data = data_agg)
+
+screenreg(results_6, naive=TRUE)
+
+
+##---------------------------------------------------
+  
+  screenreg(list(results_4, results_5, results_6))
+
+
+
+```
+
+
+```{r}
+##modelos con interacciones para matematica
+
+##interaccion sd ingresos con ser pobre/rico
+
+##creacion variable bajo nse vs otros 
+
+data_agg$quintiles <- dplyr::ntile(x = data_agg$ingresos,
+                              n = 5) 
+##ahora creamos variable nse con bajo vs el resto, le daremos 1 a nse bajo (que incluye a 2 quintiles mas pobres) y 0 a los no bajos
+
+data_agg$bajo_nse= ifelse(data_agg$quintiles<=2, 1, 0)
+
+##probamos interaccion bajo nse sd ingresos matematica
+
+results_7 = lmer(puntaje_mate ~ 1 + sd_ingresos + bajo_nse + sd_ingresos*bajo_nse + log(ingresos) + sexo + educacion + nacionalidad + etnia + m_educacion + sd_educacion + m_ingresos + nacionalidad_j + etnia_j + sexo_j + (1|rbd), data = data_agg)
+
+screenreg(results_7, naive=TRUE)
+
+plot_model(results_7, type="int")
+
+
+```
+
+
+
+
+```{r, echo=FALSE, results='asis'}
+htmlreg(list(results_1, results_2, results_3),
+    custom.model.names = c("Individual","Grupal","Multinivel"),
+    custom.coef.names = c("Intercepto", "Ingresos" ,"Mujer", "Educación", "Migrante", "Indígena", "Heterogeneo socialmente", "Homogeneidad social media", "Homogeneidad social baja", "Heterogeneidad educativa", "Heterogeneidad cultural", "Homogeneidad cultural alta", "Homogeneidad étnica baja", "Heterogeneo étnicamente", "Baja homogeneidad género", "Alta homogeneidad género" ),
+    custom.note = "%stars. Errores estándar en paréntesis",
+    caption="Comparación modelos",
+    caption.above=TRUE,
+    digits=2,
+    doctype = FALSE,
+    override.coef= list(c(198.35,4.05,-5.45,1.97,3.04,0.09), c(289.45,45.04,13.64,28.8,-22.44,-2.46,-12.56,7.18,-0.29,-8.43,0.79), c(227.18,3.42,-5.63,1.86,2.98,0.34,38.4,11.85,25.45,-19.05,-3.87,-15.13,5.65,-1.16,-9.93,3.09)),
+    override.pvalues= list(c(0,0,0,0,0,0.9), c(0,0,0,0,0,0.9,0,0.009,0.9,0,0.9), c(0,0,0,0,0,0.9,0,0,0,0,0.009,0,0.009,0.15,0,0.7)))
+
+##aun falta arreglar errores estandar de los coeficientes que no coinciden con el screen reg
+```
+
+
+En primer lugar, antes de comenzar a describir los párametros de los modelos estimados, es importante mencionar la cantidad de varianza de los puntajes de cada una de las pruebas que hay entre las escuelas chilenas (técnicamente denominada correlación intraclase que se obtiene a partir del modelo nulo). Siguiendo los resultados, tenemos que un 47% de la varianza del puntaje SIMCE Matemática está entre las escuelas. Para el caso de lenguaje e historia la varianza entre escuelas es más baja, del orden de 29% y 32% respectivamente. 
+
+Si estimamos el modelo de regresión sólo considerando las variables individuales los datos nos muestran que todas las variables que teoricamente formulamos como potencialmente explicativas del rendimiento academico en matemática lo son empiricamente. En ese sentido, todas las variables incluidas son estadisticamente significativas con un nivel de confianza equivalente a un 99%. Las variables que muestran una relación más fuerte con el puntaje SIMCE de Matematica 
+
+desaparece efecto heterogeneidad cuando ingreso media socioeconomica, para educacion cuando meto promedio pierde potencia la heterogeneidad educativa. ahora bien si pongo solo sd ingreso y sd educacion tienen tres estrellitas. 
+
+
 
 #Bibliografía
 

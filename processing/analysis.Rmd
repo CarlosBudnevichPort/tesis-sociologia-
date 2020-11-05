@@ -1,38 +1,374 @@
 ##Carga de paquetes
 pacman::p_load(dplyr, #Manipulacion de datos
               stargazer, #Tablas
-              sjmisc, # Tablas
-              summarytools, # Tablas
-              kableExtra, #Tablas
-              sjPlot, #Tablas y gráficos
-              corrplot, # Correlaciones
+              sjmisc, 
+              summarytools, 
+              kableExtra, 
+              sjPlot, 
+              corrplot, 
               sessioninfo,
-              webshot) # Información de la sesión de trabajo
+              webshot, 
+              lme4,
+              reghelper,
+              haven,
+              descr,
+              ggplot2, 
+              texreg,
+              lm.beta,
+              sjlabelled,
+              plyr,
+              classInt
+              ) 
               
 options(scipen=999) #evitar notación científica
               
+
+
 ##Carga de datos 
 
 load("input/data/proc/data.RData")
+load("input/data/proc/data_agg.RData")
 
-#Exploración inicial datos
+```{r, echo=FALSE, results='hide'}
 
-names(data)
+##modelos nulos
+results_0=lmer(puntaje_mate ~ 1 + (1|rbd), data=data)
+summary(results_0)
 
-dim(data)
+screenreg(results_0)
 
-data= round(data,digits=2)
-data2= data %>% select(sexo,ingresos, puntaje_mate, puntaje_leng, puntaje_hist, cultura, educacion)
-data2$rbd=NULL
-data2$sexo=set_label(x=data2$sexo, label= "Sexo")
+results_01=lmer(puntaje_leng ~ 1 + (1|rbd), data=data)
 
-##generamos tabla descrptiva con summary tools 
-
-dfSummary(data2, plain.ascii = FALSE)
-
-view(dfSummary(data2, headings=FALSE))
+screenreg(results_01)
 
 
-save(dfSummary, file= "output/images/descriptivos.html")
+reghelper::ICC(results_0)
 
-##para variables nivel 2 usamos tabla stargazer
+reghelper::ICC(results_01)
+
+
+
+##modelo 1 con v individuales
+
+results_1 = lmer(puntaje_mate ~ 1 + ingresos + sexo + educacion + nacionalidad + etnia + (1|rbd), data = data)
+screenreg(results_1, naive=TRUE)
+
+
+
+##modelo 1 con v individuales cat como factor
+results_1.1 = lmer(puntaje_mate ~ 1 + ingresos + sexo + educacion + nacionalidad + etnia + (1 | rbd), data = data)
+screenreg(results_1.1, naive=TRUE)
+
+
+
+##etiquetar
+
+##modelo 2 con variables nivel 2 
+
+results_2= lmer(puntaje_mate ~ sd_ingresos + sd_educacion + div_cultura + num_mujeres + (1|rbd), data=data_agg)
+
+screenreg(results_2)
+
+##modelo 3 con variables nivel 1 y nivel 2 
+
+results_3= lmer(puntaje_mate ~ sd_ingresos + sexo + ingresos + educacion + cultura + sd_educacion + div_cultura + num_mujeres + (1|rbd), data=data_agg)
+
+screenreg(results_3)
+
+
+
+
+
+```
+
+
+```{r}
+data_agg_d= data %>% group_by(rbd) %>% summarise_all(funs(mean)) %>% as.data.frame()
+stargazer(data_agg_d, type = "text")
+
+data_agg_sd= data %>% group_by(rbd) %>% summarise_all(funs(sd)) %>% as.data.frame()
+stargazer(data_agg_sd, type = "text")
+
+```
+
+```{r}
+##cortes con jenks
+
+
+classIntervals(data_agg_d$nacionalidad, n=3, style="jenks")
+
+
+classIntervals(data_agg_d$etnia, n=3, style="jenks")
+
+
+classIntervals(data_agg_d$sexo, n=3, style="jenks")
+
+
+classIntervals(data_agg_d$cultura, n=3, style="jenks")
+
+
+classIntervals(data_agg_d$nacionalidad, n=3, style="jenks")
+
+classIntervals(data_agg_sd$ingresos, n=2, style="jenks")
+
+##colegios heterogeneos tienen sd ingresos > 145.681,8
+
+##creamos variable solo con colegios homogeneos 
+
+data_agg_sd$homogeneos= ifelse(data_agg_sd$ingresos<=145681.8, data_agg_sd$ingresos, NA)
+
+classIntervals(data_agg_sd$homogeneos, n=3, style = "jenks")
+
+
+```
+
+```{r}
+##creamos variable heterogeneidad socioeconomica sg ingresos
+data_agg$ingresos_j = ifelse(data_agg$sd_ingresos<=61908, "alta homogeneidad", ifelse((data_agg$sd_ingresos>61908) & (data_agg$sd_ingresos<=99764), "homogeneidad media", ifelse((data_agg$sd_ingresos>99764) & (data_agg$sd_ingresos<=145589), "homogeneidad baja", "heterogeneo"))) 
+
+data_agg$ingresos_j= as_factor(data_agg$ingresos_j)
+
+```
+
+
+```{r}
+
+data_agg$sexo_j = ifelse(data_agg$num_mujeres<=0.39, "homogeneo bajo", ifelse((data_agg$num_mujeres>0.39) & (data_agg$num_mujeres<=0.72), "heterogeneo", "homogeneo alto")) 
+
+data_agg$sexo_j= as_factor(data_agg$sexo_j)
+```
+
+```{r}
+data_agg$cultura_j = ifelse(data_agg$div_cultura<=0.19, "homogeneo bajo", ifelse((data_agg$div_cultura>0.20) & (data_agg$div_cultura<=0.44), "heterogeneo", "homogeneo alto")) 
+
+data_agg$cultura_j= as_factor(data_agg$cultura_j)
+
+```
+
+```{r}
+data_agg$nacionalidad_j = ifelse(data_agg$p_nacionalidad<0.07, "homogeneo bajo", ifelse((data_agg$p_nacionalidad>=0.07) & (data_agg$p_nacionalidad<=0.23), "heterogeneo", "homogeneo alto")) 
+
+data_agg$nacionalidad_j= as_factor(data_agg$nacionalidad_j)
+
+```
+
+```{r}
+data_agg$etnia_j = ifelse(data_agg$p_etnia<=0.16, "homogeneo bajo", ifelse((data_agg$p_etnia>0.16) & (data_agg$p_etnia<=0.41), "heterogeneo", "homogeneo alto")) 
+
+data_agg$etnia_j= as_factor(data_agg$etnia_j)
+
+
+```
+
+
+```{r}
+##creacion variable bajo nse vs otros 
+
+data_agg$quintiles <- dplyr::ntile(x = data_agg$ingresos,
+                              n = 5) 
+##ahora creamos variable nse con bajo vs el resto, le daremos 1 a nse bajo (que incluye a 2 quintiles mas pobres) y 0 a los no bajos
+
+data_agg$bajo_nse= ifelse(data_agg$quintiles<=2, 1, 0)
+
+
+```
+
+
+```{r}
+##modelos nulos
+results_0=lmer(puntaje_mate ~ 1 + (1|rbd), data=data_agg)
+summary(results_0)
+
+screenreg(results_0)
+
+results_01=lmer(puntaje_leng ~ 1 + (1|rbd), data=data_agg)
+
+screenreg(results_01)
+
+screenreg(results_02)
+
+reghelper::ICC(results_0)
+
+reghelper::ICC(results_01)
+
+```
+
+
+summary(data_agg$ingresos)
+```{r}
+##modelo con v individuales
+results_1 = lmer(puntaje_mate ~ 1 + log(ingresos) + sexo + educacion + nacionalidad + etnia + (1|rbd), data = data)
+screenreg(results_1, naive=TRUE)
+
+results_10 = lmer(puntaje_leng ~ 1 + log(ingresos) + sexo + educacion + nacionalidad + etnia + (1|rbd), data = data)
+screenreg(results_10, naive=TRUE)
+
+
+
+data_agg$sd_ingresos= (data_agg$sd_ingresos)/10000
+
+data_agg$m_ingresos= (data_agg$m_ingresos)/10000
+
+
+##modelo con v nivel 2
+
+##matematica
+results_2= lmer(puntaje_mate ~ ingresos_j + sd_educacion + nacionalidad_j + etnia_j + sexo_j + (1|rbd), data=data_agg)
+
+screenreg(results_2)
+
+##lenguaje
+results_20= lmer(puntaje_leng ~ sd_educacion + ingresos_j + sd_educacion + nacionalidad_j + etnia_j + sexo_j  + (1|rbd), data=data_agg)
+
+screenreg(results_20)
+
+##historia 
+results_200= lmer(puntaje_hist ~ sd_ingresos + sd_educacion + div_cultura + num_mujeres + (1|rbd), data=data_agg)
+
+screenreg(results_200)
+
+##matematica con nse perfiles
+results_2000= lmer(puntaje_mate ~ ingresos_j + sd_educacion + div_cultura + num_mujeres + (1|rbd), data=data_agg)
+
+screenreg(results_2000)
+
+##individual y grupal
+
+results_3= lmer(puntaje_mate ~ 1 + log(ingresos) + sexo + cultura + educacion + sd_ingresos + sd_educacion + num_mujeres + div_cultura + m_ingresos + (1 | rbd), data = data_agg)
+
+screenreg(results_3)
+
+##individual, grupal e interacciones
+##interaccion grupo etnica y nacionalidad
+results_4= lmer(puntaje_mate ~ 1 + log(ingresos) + sexo + p_nacionalidad*nacionalidad + nacionalidad + p_etnia*etnia + etnia + educacion + sd_ingresos + sd_educacion + num_mujeres + m_ingresos + (1 | rbd), data = data_agg)
+
+screenreg(results_4)
+
+##a indigenas cuando estan con mas indigenas van empeorando su rendimiento cademico pero mucho menos malo que cuando evaluamos el coeficiente solo lo cual significa que el efecto negativa de la cantidad de indigenas es mucho peor para gente no indigena, en cambio en nacionalidad les conviene estar con mas migrantes aunque ambas relaciones no son significativas. por su parte, para el conjunto de la sala los migrantes generan efecto perjudical en el rendimiento academico y lo mismo para la proporcion de estudiantes indigenas
+
+##interaccion mujeres y proporcion mujeres
+results_40= lmer(puntaje_mate ~ 1 + log(ingresos) + sexo + p_nacionalidad*nacionalidad + nacionalidad + p_etnia*etnia + etnia + educacion + sd_ingresos + sd_educacion + num_mujeres + num_mujeres*sexo + m_ingresos + (1 | rbd), data = data_agg)
+
+screenreg(results_40)
+
+##mujeres generan efecto positivo en la sala de clases a todos pero no especialmente a las mujeres pues interaccion entre num mujeres y ser mujer es negativa no significativa, incluso tendria un efecto negativo sobre mujeres el estar con mas mujeres, entonces pareciera ser que en matematica el efecto es muy positivo para los hombres particularmente del numero de mujeres reflejado e que interaccion de mujeres y ser mujer es negativo
+##interaccion 
+
+```
+
+
+
+```{r}
+## interaccion sd ingresos con ingresos de la gente
+results_400= lmer(puntaje_mate ~ 1 + log(ingresos) + log(ingresos)*sd_ingresos + sexo + nacionalidad + p_etnia*etnia + etnia + educacion + sd_ingresos + sd_educacion + num_mujeres + m_ingresos + p_nacionalidad + (1 | rbd), data = data_agg)
+
+screenreg(results_400)
+
+```
+
+```{r}
+##ahora vemos interacciones creando perfiles sg homo heterogeneidad de genero
+##interaccion mujeres y proporcion mujeres
+results_40= lmer(puntaje_mate ~ 1 + log(ingresos) + sexo + p_nacionalidad + nacionalidad + p_etnia + etnia + educacion + sd_ingresos + sd_educacion + sexo_j + sexo_j*sexo + m_ingresos + (1 | rbd), data = data_agg)
+
+screenreg(results_40)
+
+##no hay un efecto de interaccion entre el tipo de establecimiento y el ser mujer, pues siguiendo la significancia de los coeficientes sabemos que los colegios heterogeneos en terminos de genero tienen 11 puntos mas que aquellos que concentran poca cantiad de mujeres. Sin embargo, dicho efecto no es mas fuerte en mujeres que en hombres, de modo que la heterogneeidad pese a lo que creiamos es igualmente beneficiosa tanto para hombres como mujeres, no habiendo evidencia para creer que las mujeres deben estar solas, es conveniente que esten juntos entonces para todes
+
+##vemos para lenguaje
+
+##ahora vemos interacciones creando perfiles sg homo heterogeneidad de genero
+##interaccion mujeres y proporcion mujeres
+results_40= lmer(puntaje_leng ~ 1 + log(ingresos) + sexo + p_nacionalidad + nacionalidad + p_etnia + etnia + educacion + sd_ingresos + sd_educacion + sexo_j + sexo_j*sexo + m_ingresos + (1 | rbd), data = data_agg)
+
+screenreg(results_40)
+##nuevamente vemos que para lenguaje tbn es mejor colegios heterogeneos vs colegios con baja cantidad de mujeres , las mujeres tienen efecto psitivo en puntaje leng, no obstante, no hay un efecto adicional de dicha relacion generica para el caso de las mujeres, indistintamente hay un efecto positivo. pero si observamos los coeficientes nomas sin considerar su significacion tenemos que un colegio homogeneo de mujeres para las mujeres tiene un mayor efecto que para los hombres pero siendo positivo en ambos casos, mientras ocurre lo contrario en colegios con poca concentracion de mujeres (o poco homogeneos isguiendo la nomenclatura)
+
+```
+
+
+
+```{r}
+##interaccion perfiles etnia y etnia
+
+results_4= lmer(puntaje_mate ~ 1 + log(ingresos) + sexo + nacionalidad_j + nacionalidad + etnia + etnia_j + etnia_j*etnia + educacion + sd_ingresos + sd_educacion + sexo_j + m_ingresos + (1 | rbd), data = data_agg)
+
+screenreg(results_4)
+
+
+##lenguaje
+results_41= lmer(puntaje_leng ~ 1 + log(ingresos) + sexo + nacionalidad_j + nacionalidad + etnia + etnia_j + etnia_j*etnia + educacion + sd_ingresos + sd_educacion + sexo_j + m_ingresos + (1 | rbd), data = data_agg)
+
+screenreg(results_41)
+
+```
+
+
+```{r}
+##interaccion perfiles nacionalidad y nacionalidad 
+
+results_4= lmer(puntaje_mate ~ 1 + log(ingresos) + sexo + nacionalidad_j*nacionalidad + nacionalidad_j + nacionalidad + etnia + educacion + sd_ingresos + sd_educacion + sexo_j + m_ingresos + (1 | rbd), data = data_agg)
+
+screenreg(results_4)
+
+
+
+##lenguaje
+results_41= lmer(puntaje_leng ~ 1 + log(ingresos) + sexo + cultura_j*nacionalidad + nacionalidad + etnia + educacion + sd_ingresos + sd_educacion + sexo_j + m_ingresos + (1 | rbd), data = data_agg)
+
+screenreg(results_41)
+
+
+```
+
+
+```{r}
+##interaccion div cultural con etnia y nacionalidad con perfiles
+##individual, grupal e interacciones
+##interaccion div cultural y nacionalidad en matematica
+results_4= lmer(puntaje_mate ~ 1 + log(ingresos) + sexo + cultura_j*nacionalidad + nacionalidad + cultura_j + etnia + educacion + sd_ingresos + sd_educacion + sexo_j + m_ingresos + (1 | rbd), data = data_agg)
+
+screenreg(results_4)
+
+
+
+##lenguaje
+results_41= lmer(puntaje_leng ~ 1 + log(ingresos) + sexo + cultura_j*nacionalidad + nacionalidad + cultura_j + etnia + educacion + sd_ingresos + sd_educacion + sexo_j + m_ingresos + (1 | rbd), data = data_agg)
+
+screenreg(results_41)
+
+```
+
+
+```{r}
+##interaccion div cultural y etnia con perfiles
+##mate
+results_420= lmer(puntaje_mate ~ 1 + log(ingresos) + sexo + cultura_j*etnia + cultura_j + nacionalidad + etnia + educacion + sd_ingresos + sd_educacion + sexo_j + m_ingresos + (1 | rbd), data = data_agg)
+
+screenreg(results_420)
+##significativo
+
+
+##lenguaje
+results_410= lmer(puntaje_leng ~ 1 + log(ingresos) + sexo + cultura_j*etnia + cultura_j + nacionalidad + etnia + educacion + sd_ingresos + sd_educacion + sexo_j + m_ingresos + (1 | rbd), data = data_agg)
+
+screenreg(results_410)
+```
+
+```{r}
+##interaccion nse bajo y heterogeneidad socioeconomica
+##mate
+results_15= lmer(puntaje_mate ~ 1 + log(ingresos) + sexo + nacionalidad + etnia + educacion + ingresos_j + bajo_nse*ingresos_j + sd_educacion + sexo_j + m_ingresos + (1 | rbd), data = data_agg)
+
+screenreg(results_15)
+
+
+
+##lenguaje
+results_150= lmer(puntaje_leng ~ 1 + log(ingresos) + sexo + nacionalidad + etnia + educacion + ingresos_j + bajo_nse*ingresos_j + sd_educacion + sexo_j + m_ingresos + (1 | rbd), data = data_agg)
+
+screenreg(results_150)
+
+
+```
+

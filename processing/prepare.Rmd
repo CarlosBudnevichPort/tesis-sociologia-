@@ -28,20 +28,30 @@ proc=merge(padres, alumnos, by="idalumno")
 
 #Seleccionar variables
 
-proc=proc %>% select(idalumno, rbd.x, cpad_p06, cpad_p07, cpad_p08_01, cpad_p08_02, cpad_p08_03, cpad_p09_01, cpad_p09_02, cpad_p09_03, cpad_p10, ptje_lect2m_alu, 
-ptje_mate2m_alu, ptje_soc2m_alu, gen_alu) %>% as.data.frame()
+proc=proc %>% select(idalumno, rbd.x, cpad_p05, cpad_p06, cpad_p07, cpad_p08_01, cpad_p08_02, cpad_p08_03, cpad_p09_01, cpad_p09_02, cpad_p09_03, cpad_p10, ptje_lect2m_alu, 
+ptje_mate2m_alu, gen_alu) %>% as.data.frame()
 
 proc<- proc %>% rename("rbd"=rbd.x) 
 
 #NSE
 frq(proc$cpad_p10)
 
-proc$cpad_p10<- recode(proc$cpad_p10, "c(99, 0)=NA")
+proc$cpad_p10<- recode(proc$cpad_p10, "c(99, 0)=NA; 1=50000; 2=150000; 3=250000; 4=350000; 5=450000; 6=550000; 7=700000; 8=900000; 9=1100000; 10=1300000; 11=1500000; 12=1700000; 13=1900000; 14=2100000; 15=3000000")
 
-proc <- proc %>%  rename("ingresos"=cpad_p10)
-proc$ingresos <- set_label(x = proc$ingresos, label="Ingresos hogar")
+frq(proc$cpad_p05)
 
-proc$ingresos <- set_labels(x = proc$ingresos, labels=c("Menos de $ 100.000"=1, "Entre $ 100.001 y $ 200.000"=2, "Entre $ 200.001 y $ 300.000"=3, "Entre $ 300.001 y $ 400.000"=4, "Entre $ 400.001 y $ 500.000"=5, "Entre $ 500.001 y $ 600.000"=6, "Entre $ 600.001 y $ 800.000"=7, "Entre $ 800.001 y $ 1.000.000"=8, "Entre $ 1.000.001 y $ 1.200.000"=9, "Entre $ 1.200.001 y $ 1.400.000"=10, "Entre $ 1.400.001 y $ 1.600.000"=11, "Entre $ 1.600.001 y $ 1.800.000"=12, "Entre $ 1.800.001 y $ 2.000.000"=13, "Entre $ 2.000.001 y $ 2.200.000"=14, "Más de $ 2.200.000"=15))
+proc$cpad_p05= recode(proc$cpad_p05, "c(99,0)=NA")
+proc$cpad_p05= (proc$cpad_p05) + 1
+
+proc$ingresos= (proc$cpad_p10)/(proc$cpad_p05)
+
+summary(proc$ingresos)
+
+hist(proc$ingresos)
+
+proc$ingresos <- set_label(x = proc$ingresos, label="Ingresos hogar per cápita")
+
+
 
 ##Chequeamos con un nuevo descriptivo los cambios realizados 
 frq(proc$ingresos)
@@ -184,19 +194,47 @@ proc <- proc %>%  rename("puntaje_mate"=ptje_mate2m_alu)
 
 proc$puntaje_mate <- set_label(x = proc$puntaje_mate, label="Puntaje Matemática")
 
-##PUNTAJE HISTORIA 
 
-summary(proc$ptje_soc2m_alu)
+##sacamos variables que no usaremos y luego eliminamos los casos perdidos, solo dejando en etnia/migr/cult los perdidos
 
-proc <- proc %>%  rename("puntaje_hist"=ptje_soc2m_alu)
+data_m= proc %>% select(rbd, puntaje_leng, puntaje_mate, ingresos, sexo, cultura, educacion, nacionalidad, etnia)
 
-proc$puntaje_hist <- set_label(x = proc$puntaje_hist, label="Puntaje Historia")
+data_m= na.omit(data_m)
 
-summary(proc$puntaje_hist)
+data_m <-sjlabelled::copy_labels(data_m,proc)
 
-##sacamos variables que no usaremos y luego eliminamos los casos perdidos
+stargazer(data_m, type="text")
 
-data= proc %>% select(rbd, puntaje_leng, puntaje_mate, puntaje_hist, ingresos, sexo, cultura, educacion, nacionalidad, etnia)
+##variables nivel 1 y 2
+data_m_agg= data_m %>%
+  group_by(rbd) %>%
+  mutate(m_ingresos = mean(ingresos)) %>%
+  mutate(sd_ingresos = sd(ingresos)) %>%
+  mutate(num_mujeres = mean(sexo==1)) %>%
+  mutate(div_cultura = mean(cultura==1)) %>%
+  mutate(p_nacionalidad = mean(nacionalidad==1)) %>%
+  mutate(p_etnia = mean(etnia==1)) %>%
+  mutate(m_educacion = mean(educacion)) %>%
+  mutate(sd_educacion = sd(educacion)) %>% as.data.frame()
+  
+stargazer(data_m_agg, type="text")
+
+data_m_agg= round(data_m_agg, digits=2)
+
+data_m_agg$sexo= set_label(x=data_m_agg$sexo, label="Sexo")
+
+save(data_m, file="input/data/proc/data_m.RData")
+save(data_m_agg, file="input/data/proc/data_m_agg.RData")
+
+##ahora base de datos sin missings en ninguna variable
+
+proc$etnia= recode(proc$etnia, "2=NA")
+
+proc$nacionalidad= recode(proc$nacionalidad, "2=NA")
+
+proc$cultura= recode(proc$cultura, "2=NA")
+
+data= proc %>% select(rbd, puntaje_leng, puntaje_mate, ingresos, sexo, cultura, educacion, nacionalidad, etnia)
 
 data= na.omit(data)
 
@@ -204,52 +242,31 @@ data <-sjlabelled::copy_labels(data,proc)
 
 stargazer(data, type="text")
 
-##variables nivel 2 
+##variables nivel 1 y 2 
 
-data <- data %>%
+data_agg= data %>%
   group_by(rbd) %>%
-  mutate(m_ingresos = mean(ingresos))
+  mutate(m_ingresos = mean(ingresos)) %>%
+  mutate(sd_ingresos = sd(ingresos)) %>%
+  mutate(num_mujeres = mean(sexo==1)) %>%
+  mutate(div_cultura = mean(cultura==1)) %>%
+  mutate(p_nacionalidad = mean(nacionalidad==1)) %>%
+  mutate(p_etnia = mean(etnia==1)) %>%
+  mutate(m_educacion = mean(educacion)) %>%
+  mutate(sd_educacion = sd(educacion)) %>% as.data.frame()
   
-data <- data %>%
-  group_by(rbd) %>%
-  mutate(sd_ingresos = sd(ingresos))
 
-data <- data %>%
-  group_by(rbd) %>%
-  mutate(num_mujeres = mean(sexo==1))
-  
-data <- data %>%
-  group_by(rbd) %>%
-  mutate(div_cultura = mean(cultura==1))
-  
-data <- data %>%
-  group_by(rbd) %>%
-  mutate(p_nacionalidad = mean(nacionalidad==1))
+stargazer(data_agg, type="text")
 
-data <- data %>%
-  group_by(rbd) %>%
-  mutate(p_etnia = mean(etnia==1))
+data_agg= round(data_agg,digits=2)
 
-data <- data %>%
-  group_by(rbd) %>%
-  mutate(m_educacion = mean(educacion))
-  
-data <- data %>%
-  group_by(rbd) %>%
-  mutate(sd_educacion = sd(educacion))
+data_agg$sexo= set_label(x=data_agg$sexo, label="Sexo")
 
-##base con solos variables individuales 
-data= round(data,digits=2)
-data$sexo=set_label(x=data$sexo, label="Sexo")
 
-data2= data %>% select(sexo,ingresos, puntaje_mate, puntaje_leng, puntaje_hist, cultura, educacion, nacionalidad, etnia)
-
-data2$rbd=NULL
-
-data2$sexo=set_label(x=data2$sexo, label= "Sexo")
 
 save(data, file="input/data/proc/data.RData")
-save(data2, file="input/data/proc/data2.RData")
+save(data_agg, file="input/data/proc/data_agg.RData")
+
 # Información de la sesión
 
 ```{r}
