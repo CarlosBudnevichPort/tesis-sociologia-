@@ -34,6 +34,14 @@ ptje_mate2m_alu, gen_alu) %>% as.data.frame()
 proc<- proc %>% rename("rbd"=rbd.x) 
 
 #NSE
+
+##ingresos por tramos
+
+proc$ingresos_t= recode(proc$cpad_p10, "c(99,0)=NA")
+
+frq(proc$ingresos_t)
+
+##INgresos per capita del hogar
 frq(proc$cpad_p10)
 
 proc$cpad_p10<- recode(proc$cpad_p10, "c(99, 0)=NA; 1=50000; 2=150000; 3=250000; 4=350000; 5=450000; 6=550000; 7=700000; 8=900000; 9=1100000; 10=1300000; 11=1500000; 12=1700000; 13=1900000; 14=2100000; 15=3000000")
@@ -55,6 +63,8 @@ proc$ingresos <- set_label(x = proc$ingresos, label="Ingresos hogar per cápita"
 
 ##Chequeamos con un nuevo descriptivo los cambios realizados 
 frq(proc$ingresos)
+
+
 
 ##Nivel eduacional
 
@@ -234,7 +244,7 @@ proc$nacionalidad= recode(proc$nacionalidad, "2=NA")
 
 proc$cultura= recode(proc$cultura, "2=NA")
 
-data= proc %>% select(rbd, puntaje_leng, puntaje_mate, ingresos, sexo, cultura, educacion, nacionalidad, etnia)
+data= proc %>% select(rbd, puntaje_leng, puntaje_mate, ingresos, ingresos_t, sexo, cultura, educacion, nacionalidad, etnia)
 
 data= na.omit(data)
 
@@ -253,7 +263,9 @@ data_agg= data %>%
   mutate(p_nacionalidad = mean(nacionalidad==1)) %>%
   mutate(p_etnia = mean(etnia==1)) %>%
   mutate(m_educacion = mean(educacion)) %>%
-  mutate(sd_educacion = sd(educacion)) %>% as.data.frame()
+  mutate(sd_educacion = sd(educacion)) %>% 
+  mutate(sd_ingresos_t = sd(ingresos_t)) %>% 
+  mutate(m_ingresos_t = mean(ingresos_t)) %>% as.data.frame()
   
 
 stargazer(data_agg, type="text")

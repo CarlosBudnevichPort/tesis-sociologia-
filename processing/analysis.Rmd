@@ -55,10 +55,6 @@ screenreg(results_1, naive=TRUE)
 
 
 
-##modelo 1 con v individuales cat como factor
-results_1.1 = lmer(puntaje_mate ~ 1 + ingresos + sexo + educacion + nacionalidad + etnia + (1 | rbd), data = data)
-screenreg(results_1.1, naive=TRUE)
-
 
 
 ##etiquetar
@@ -71,7 +67,7 @@ screenreg(results_2)
 
 ##modelo 3 con variables nivel 1 y nivel 2 
 
-results_3= lmer(puntaje_mate ~ sd_ingresos + sexo + ingresos + educacion + cultura + sd_educacion + div_cultura + num_mujeres + (1|rbd), data=data_agg)
+results_3= lmer(puntaje_mate ~ sd_ingresos + sexo + ingresos + m_educacion + educacion + cultura + sd_educacion + div_cultura + num_mujeres + (1|rbd), data=data_agg)
 
 screenreg(results_3)
 
@@ -209,13 +205,19 @@ data_agg$sd_ingresos= (data_agg$sd_ingresos)/10000
 
 data_agg$m_ingresos= (data_agg$m_ingresos)/10000
 
+data_agg= round(data_agg$sd_ingresos, digits=2)
+
 
 ##modelo con v nivel 2
 
 ##matematica
-results_2= lmer(puntaje_mate ~ ingresos_j + sd_educacion + nacionalidad_j + etnia_j + sexo_j + (1|rbd), data=data_agg)
+results_2= lmer(puntaje_mate ~ sd_ingresos + m_ingresos + sd_educacion + nacionalidad_j + etnia_j + sexo_j + (1|rbd), data=data_agg)
 
 screenreg(results_2)
+
+hist(data_agg$m_educacion)
+
+summary(data_agg$m_educacion)
 
 ##lenguaje
 results_20= lmer(puntaje_leng ~ sd_educacion + ingresos_j + sd_educacion + nacionalidad_j + etnia_j + sexo_j  + (1|rbd), data=data_agg)
