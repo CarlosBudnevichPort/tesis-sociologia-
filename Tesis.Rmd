@@ -1,14 +1,25 @@
 ---
-title: "La composición social de las escuelas y su relación con el rendimiento en lenguaje y matemática de los estudiantes secundarios chilenos"
+title: La composición social de las escuelas y su relación con el rendimiento en lenguaje
+  y matemática de los estudiantes secundarios chilenos
+author:
+- Carlos Budnevich Portales (tesista)
+- Juan Carlos Castillo (Profesor Guía)
+linestretch: '1.5'
 output:
   html_document:
-    highlight: tango # probar espresso
-    number_sections: TRUE # numera las secciones y subsecciones
-bibliography: input/bib/referencias.bib
-csl: input/bib/apa.csl
+    df_print: paged
+  pdf_document:
+    highlight: tango
+    number_sections: yes
+css: docs/xaringan/custom.css
 link-citations: yes
-
+bibliography: input/bib/referencias.bib
+geometry: margin=0.78in
+csl: input/bib/apa.csl
+beforeInit: doc/xaringan/macros.js
+header-includes: \usepackage{times}
 ---
+
 
 
 
@@ -19,10 +30,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 
+\pagebreak
 
-Autor: Carlos Budnevich Portales
-
-Profesor guía: Juan Carlos Castillo
+<div style="text-align: justify">
 
                                                            
 **Resumen**
@@ -38,13 +48,14 @@ Palabras clave: **desigualdad**, **educación de mercado**, **segregación educa
 La educación es una de las áreas que mayor atención política y social recibe debido a la importancia que reviste en términos del impacto que tiene sobre la fisonomía de las sociedades. Las posibilidades de ascenso social [@palet_desiguales_2017], la reproducción social de la estructura de clases [@bourdieu_herederos_2009;@bourdieu_reproduccion_1998;@hansen_social_1997], y la generación de segmentos socialmente separados o sociedades segregadas [@bellei_estudio_2013; @valenzuela_socioeconomic_2014;@ortiz_escuelas_2015] asociadas a la forma del sistema educativo son sólo algunos elementos de esta área que han sido fruto de extensos debates tanto a nivel internacional como nacional. 
 
 Uno de los principales elementos que ha capturado la atención del fenómeno educativo es de qué forma poder mejorar la calidad del proceso educacional, particularmente en lo que refiere a la transmisión y adquisición de habilidades de los alumnos. En ese sentido, en términos de políticas educacionales, la discusión que subyace a esta investigación es de una importancia fundamental. 
+
 Se ha sostenido, sistemáticamente, que los resultados académicos o la efectividad escolar dependen, exclusivamente, de variables asociadas a la gestión pedagógica, la calidad docente, y los recursos materiales que disponen los establecimientos educacionales. Contraria a esa visión, hay quienes [@ortiz_escuelas_2015; @mizala_bringing_2012; @taut_efecto_2012;@thrupp_school_2002b] plantean la importancia que tiene la composición social de los establecimientos educativos en lo que respecta al rendimiento de los estudiantes y su efecto perjudicial sobre aquellos más desaventajados. Las consecuencias que se derivan de cada una de estas posturas divergen sustancialmente, pues mientras la primera posición nos sugiere que la política educativa debe centrarse en la inyección de recursos económicos y capital para mejorar la calidad educacional, la segunda da cuenta de la relevancia que asume la fisonomía y estructura del sistema educativo, enfatizando en la importancia que tiene la igualdad y equidad [@mizala_bringing_2012]. En efecto, si se logra demostrar que una mayor mixtura o heterogeneidad social tiene un impacto positivo en el rendimiento de los estudiantes históricamente marginados las orientaciones de la política educacional deben ir en la dirección de reformar la estructura del sistema procurando promover una mayor integración social a todo nivel en términos de generar escuelas más heterogéneas. 
 
 Chile resulta ser un interesante caso de estudio en esta materia, en virtud de la novedad comprendida en las reformas que se han implementado en las últimas décadas. Dos de ellas merecen especial atención debido al elevado impacto que han tenido. Primeramente, el paquete de reformas que fue implementado a partir de 1980 por la dictadura civil militar. Estas medidas producen una serie de cambios sustanciales en el funcionamiento y estructura administrativa del sistema escolar. Uno de los más importantes, refiere al nuevo rol que asume el mercado, el cual irrumpe como un proveedor central en la educación secundaria despojando al Estado en cuanto al rol protagónico que había desempeñado. De este modo, proliferan los establecimientos privados que, pese a recibir financiamiento estatal, emplean mecanismos fuertemente segregadores [@oecd_pisa_2016]. Pruebas de admisión arbitraria, selección de los estudiantes según criterios discrecionales (entrevistas familiares, revisión de imágenes de los postulantes, estado civil de los padres, entre otros), segmentación socioeconómica de la matrícula derivado de las mensualidades cobradas, en definitiva, se consolida un esquema educacional edificado a partir de la discriminación social hacia los estudiantes [@bellei_estudio_2013; @bellei_gran_2015; @valenzuela_evolucion_2008; @trevino_segregacion_2014; @bellei_expansion_2007; @garcia-huidobro_desigualdad_2007;@contreras_when_2010].
 
 Basado en el paradigma de mercado, se procuró hacer competir a las escuelas por la captación de los estudiantes a partir del denominado “voucher”, que es una subvención otorgada por el Estado sin distinción (esto es, independiente de si lucra o no y de su dependencia administrativa) por la cantidad de alumnos matriculados en cada escuela y la asistencia efectiva que ellos mostraran. Esto obligaría a los establecimientos a impulsar políticas que mejoraran los logros educacionales para poder captar más alumnos y así poder financiarse y subsistir.
 
-Luego, el segundo gran punto de inflexión de la educación chilena de las últimas décadas, se remite a la recién (2015) aprobada nueva ley de educación pública. Los contenidos de la reforma contemplaron trascendentales cambios que significaron una radical reorientación de los antiguos cimientos y directrices que habían marcado la pauta de la educación chilena desde el conjunto de reformas ejecutadas en 1980. El traspaso de la administración de la educación desde los municipios al aparato estatal (mediados por los servicios locales de educación) y la erradicación de mecanismos selectivos en colegios que reciban algún tipo de financiamiento público revierten, parcialmente, la tendencia mercantil y discriminatoria que se había impregnado en el corazón del sistema educacional. 
+Luego, el segundo gran punto de inflexión de la educación chilena de las últimas décadas, se remite a la recién (2015) aprobada nueva ley de educación pública. Los contenidos de la reforma contemplaron trascendentales cambios que significaron una radical reorientación de los antiguos cimientos y directrices que habían marcado la pauta de la educación chilena desde el conjunto de reformas ejecutadas en 1980. El traspaso de la administración de la educación desde los municipios al aparato estatal (mediados por los servicios locales de educación), la erradicación de mecanismos selectivos en colegios que reciban algún tipo de financiamiento público, y el fin al copago revierten, parcialmente, la tendencia mercantil y discriminatoria que se había impregnado en el corazón del sistema educacional. Para cumplir con los objetivos anteriores, se diseña un nuevo mecanismo de admisión escolar (sistema de admisión escolar, en adelante "SAE"), que busca compatibilizar las preferencias de los padres con criterios de justicia en la asignación de la oferta educativa (pública).
 
 Contrario al objetivo declarado por los promotores de la gran reforma educacional de 1980 de mejorar la competitividad en el sistema educacional para incentivar una mejora sistemática en los logros educacionales, lo que se ha producido es una alta estratificación social del rendimiento académico (Informe MINEDUC, 2018). La diferencia de puntaje en matemática entre el quintil más rico y el más pobre en estudiantes de II medio es de 102 puntos para el año 2018, cuando 10 años atrás era de 115, lo cual revela los pocos avances en materia de reducir la brecha de aprendizaje entre individuos de distinto origen socioeconómico.  En consecuencia, hay luces sobre una estrecha relación entre el nivel socioeconómico del estudiante y el rendimiento académico.
 
@@ -58,13 +69,13 @@ Sobre la diversidad socioeconómica, si bien se ha mostrado claramente que escue
 
 En cuanto a la diversidad cultural (considerando la etnia y nacionalidad de los estudiantes), la evidencia para nuestro país muestra que para las minorías étnicas es perjudicial altos niveles de concentración de población indígena en un mismo establecimiento escolar para efectos del rendimiento académico [@canales_educational_2018]. No obstante, al igual que en el caso de la heterogeneidad socioeconómica no se sabe en qué punto crítico se vuelve negativa la concentración étnica, de modo que no sabemos qué niveles de heterogeneidad cultural son deseables para el rendimiento académico de minorías étnicas y migrantes. 
 
-En suma, la pregunta que se busca responder mediante esta investigación es: ¿En qué medida la heterogeneidad de la composición escolar, en términos socioeconómicos, de género, étnicos, y nacionalidad, influye en los resultados obtenidos por mujeres, indígenas, migrantes, e individuos de bajo nivel socioeconómico en la prueba SIMCE 2017 de matemática y lenguaje?
+En suma, la pregunta que se busca responder mediante esta investigación es: ¿En qué medida la heterogeneidad de la composición escolar, en términos socioeconómicos, de género, étnicos, y nacionalidad, se relaciona con los resultados obtenidos por mujeres, indígenas, migrantes, e individuos de bajo nivel socioeconómico en la prueba SIMCE 2017 de matemática y lenguaje?
 
 El texto se divide en cinco secciones: En primer lugar, caracterizamos las desigualdades educativas en Chile, partiendo con una breve revisión histórica de la privatización del sistema educacional, después caracterizamos la desigualdad social en el rendimiento académico, y luego una definición de calidad educativa. En segundo lugar, indagamos en la segregación de la educación chilena y su vínculo con la composición social de los establecimientos. Tercero, se revisó literatura relevante en relación con el efecto que tienen los compañeros en el aprendizaje de los alumnos. Cuarto, se enuncian los objetivos e hipótesis de investigación de acuerdo con la revisión de literatura y la pregunta que orienta la investigación. Por último, se describe la metodología a utilizar.
 
-#Desigualdades educativas
+# Desigualdades educativas
 
-##Privatización del sistema educacional chileno
+## Privatización del sistema educacional chileno
 
 Los antecedentes de la formalización de un sistema educacional se remontan a inicios del Siglo XIX. En aquellos tiempos, el acceso a la educación formal estaba resguardado, exclusivamente, para los miembros de la élite nacional. La provisión de la educación escolar descansaba casi completamente en congregaciones religiosas e instructores privados, de modo que no existía el desarrollo de una institucionalidad educativa más allá de iniciativas privadas y gremiales [@bellei_nueva_2018].
 
@@ -90,7 +101,13 @@ La dimensión logística de la reforma contiene un alto grado de complejidad por
 
 Con el programa de reformas al sistema educativo chileno, se plantea [@bellei_nueva_2018] que la fisonomía de la educación deja de ser “puramente” mercantil, pasando a ser una especie de sistema mixto, en el cual el mercado tiene cierto margen de operación (principalmente, mediante los colegios particulares pagados) y, simultáneamente, un sistema de educación pública robusto con un fuerte apoyo estatal en términos de financiamiento y regulación.
 
-##Estratificación social del rendimiento académico
+Enmarcado en el mismo proceso de búsqueda de una educación más equitativa y proveedora de igualdad de oportunidades para todos, se implementa un nuevo sistema de admisión escolar (en adelante, SAE). En ese sentido, se proscribe la selección de estudiantes en colegios que reciban financiamiento estatal y, a su vez, se prohibe la posibilidad del cobro de aranceles (copago) por parte de los establecimientos educativos. Para resguardar lo anterior, se diseña un sistema de admisión en el cual un algoritmo dirime el colegio de los estudiantes en función de las preferencias de los padres, igualando la probabilidad de ser seleccionado para todos los alumnos. 
+
+En virtud de este nuevo diseño de admisión escolar, era esperable una mayor adhesión al nuevo sistema gracias al énfasis colocado en las preferencias de los padres, al momento de elegir una escuela. Si bien hay una situación de conformidad y percepción de mejoría generalizada debido al cáracter equitativo que caracteriza al sistema, aun existen ciertos reparos.
+
+Recogiendo el testimonio de apoderados que postularon bajo el nuevo sistema de admisión, (citar aqui carrasco et. al) documentan la heterogeneidad de las experiencias vividas por los apoderados al hacer uso de este nuevo sistema. Mientras los sectores socioeconomicos medios perciben con cierto recelo las modificaciones introducidas, los padres de niveles socioeconomico más bajo aducen que es muy positivo en la medida que ya no pueden ser discriminados por ninguna razón arbitraria. Aun cuando los sectores medios ven amenazado su estatus derivado de la inevitable mixtura social que produce el nuevo mecanismo de admisión, reconocen positivamente su orientación igualitarista. 
+
+## Estratificación social del rendimiento académico
 
 La realidad empírica muestra que, pese a los objetivos de quienes impulsaron la gran “modernización” del sistema educacional, el logro académico de los estudiantes no ha exhibido estadísticas particularmente positivas. Tomando los resultados desde una perspectiva temporal de las dos pruebas más importantes que evalúan las habilidades de los estudiantes, sólo en una de ellas hay un aumento sostenido, aunque no de gran magnitud, del puntaje en la prueba SIMCE. En efecto, en la prueba de Matemática, hay una mejora de 14 puntos entre el año 2008 y el año 2018. Mientras en Lenguaje, los resultados académicos son desalentadores, pues hay una disminución en los últimos 10 años de los puntajes obtenidos. 
 
@@ -115,7 +132,7 @@ Gráfico 3: Puntaje SIMCE Matemática II medio por quintil de ingreso
 
 Fuente: Extraído del informe MINEDUC 2018 elaborado por la Agencia de Calidad de la Educación
 
-En la misma línea, el comportamiento que tiene el rendimiento académico no es homogéneo si entramos a examinar el género de los estudiantes. Para el caso de la prueba de lenguaje, las diferencias de puntaje que hay entre hombres y mujeres alcanzan una proporción alta y cambiante en el curso de los años. Así, la brecha de género en el aprendizaje de lenguaje se ha ido acentuando con el paso del tiempo, habiendo 15 puntos de diferencia entre hombres y mujeres en la última rendición del SIMCE, en favor de estas últimas. Es interesante mencionar que la brecha de género constatada depende de manera importante del instrumento de medición que se esté utilizando. En ese sentido, a partir de la prueba PISA es posible observar que la brecha es casi inexistente, no obstante, en otras pruebas como SIMCE y TIMSS, las diferencias de género pueden advertirse con claridad.
+En la misma línea, el comportamiento que tiene el rendimiento académico no es homogéneo si entramos a examinar el género de los estudiantes. Para el caso de la prueba de lenguaje, las diferencias de puntaje que hay entre hombres y mujeres alcanzan una proporción alta y cambiante en el curso de los años. Así, la brecha de género en el aprendizaje de lenguaje se ha ido acentuando con el paso del tiempo, habiendo 15 puntos de diferencia entre hombres y mujeres en la última rendición del SIMCE, en favor de estas últimas. Es interesante mencionar que la brecha de género constatada en matemática depende de manera importante del instrumento de medición que se esté utilizando. En ese sentido, a partir de la prueba PISA y SIMCE es posible observar que la brecha es casi inexistente (para el caso de PISA la brecha ha ido disminuyendo sistemáticamente como pueden ver en el gráfico), no obstante, en la prueba TIMSS, las diferencias de género pueden advertirse con claridad.
 
 Gráfico 4: Brechas de género en prueba SIMCE de Lenguaje II medio
 
@@ -135,7 +152,7 @@ Gráfico 6: Serie histórica de las brechas de género en prueba TIMSS de Matem�
 
 Fuente: Extraído de informe nacional de Agencia de la Calidad de la Educación TIMSS 2015
 
-##Acerca de la calidad educativa en el contexto de un sistema educativo desigual
+## Acerca de la calidad educativa en el contexto de un sistema educativo desigual
 
 El rendimiento académico en pruebas estandarizadas es una de las muchas dimensiones que componen una educación de calidad. Teniendo eso a la vista, el concepto de calidad educativa ha sido objeto de numerosos debates tanto en la literatura como en organismos asociados a la supervisión, administración, y regulación de la educación en Chile.
 
@@ -161,9 +178,9 @@ Con ese insumo teórico, las políticas públicas disponen de un referente con e
 
 Asimismo, es crucial relevar la trascendencia que tiene la inclusión social en una educación de calidad. De este modo, la preocupación no debe residir meramente en formar individuos con aptitudes afectivas, académicas, y cognitivas, sino que también en promover activamente el respeto hacia el otro y el trato igualitario a los individuos independiente de su origen social, cultural, étnico, y de género. De este modo, las escuelas deben centrar su quehacer en hacer de ellas espacios más inclusivos socialmente, combatiendo así la segregación que impera en nuestro sistema educacional. 
 
-#Segregación social del sistema educacional chileno
+# Segregación social del sistema educacional chileno
 
-##Una caracterización cuantitativa de la segregación social
+## Una caracterización cuantitativa de la segregación social
 
 El fenómeno de la segregación social se vincula estrechamente al proceso educativo que vivencian los estudiantes. Un sistema educacional más inclusivo, es decir, menos segregado, es socialmente beneficioso para el conjunto de la sociedad, así como también para los individuos. Cuando los sujetos comparten en la sala de clases con individuos de origen social diverso tiene, entre sus consecuencias positivas, desarrollar una mayor tolerancia hacia sujetos de diversa procedencia social, favorece la eliminación de estereotipos y estigmas, es un estímulo importante a la cohesión social de los países, entre otros beneficios [@valenzuela_evolucion_2008].
 
@@ -191,7 +208,7 @@ Gráfico 8: Índice de inclusión social y académica para países perteneciente
  
 Fuente: Extraído de Bellei (2013): “El estudio de la segregación socioeconómica y académica de la educación chilena. Estudios pedagógicos” 
 
-##Relación de la segregación social con la composición de los establecimientos
+## Relación de la segregación social con la composición de los establecimientos
 
 Siguiendo esta caracterización más general, es posible constatar que el elevado nivel de segregación social del sistema educacional chileno se expresa concretamente en una alta homogeneidad interna de los establecimientos y, también, una alta heterogeneidad entre las escuelas. En ese sentido, @villalobos_composicion_2020 señala que el sistema escolar chileno tendría cuatro grupos de escuelas, agrupadas a partir de un conjunto de atributos sociales identificados por el autor (género, etnia, nacionalidad, necesidades educativas especiales, y nivel socioeconómico). Un grupo de establecimientos concentraría a la élite del país, en colegios particular pagados, un segundo grupo que agruparía a estudiantes vulnerables, un tercer grupo que integraría a las clases medias del país, y un cuarto grupo de establecimientos que tendría un elevado grado de heterogeneidad social en términos socioeconómicos y académicos. 
 
@@ -207,7 +224,7 @@ El modo a partir del cual se genera la tipología de establecimientos resulta te
 
 En términos étnicos, @trevino_educacion_2017 muestra de qué forma se generan los patrones de segregación de la población indígena en Chile. Según este, la segregación de este grupo en particular se explicaría por razones geográficas, esto es, a raíz de la forma en que se asienta la población, donde los sectores indígenas tienden a concentrarse en zonas rurales. De esta forma, habría una diferencia importante respecto a otras formas de segregación social que venían dadas, principalmente, por políticas explícitas de los establecimientos educacionales. Por lo tanto, se concentran de forma importante en las zonas rurales, lugares en los cuales encontraríamos una mayor homogeneidad étnica de los establecimientos, mientras en zonas urbanas dicha homogeneidad interna sería menos acentuada. 
 
-##Factores asociados a la segregación social
+## Factores asociados a la segregación social
 
 Respecto a las causas que explican esta elevada magnitud de segregación la evidencia ha demostrado que uno de los principales factores que influiría sería la asimetría de información existente entre los apoderados que eligen las escuelas, mediado por el capital económico y cultural que disponen [@elacqua_impact_2012]. En efecto, las familias de bajos ingresos elegirían los colegios a partir de criterios no educacionales, a saber, según cercanía del hogar fundamentalmente, mientras las familias con mayor capital económico enfocarían su decisión en la calidad académica de las escuelas [@valenzuela_socioeconomic_2014]. Desde una perspectiva cualitativa [@hernandez_eleccion_2015], muestran de qué modo la clase media y baja del país producen dinámicas de exclusión social. Los sectores medios fundamentan su elección de escuela según la búsqueda de distinción social, mientras los individuos de familias más pobres se auto excluyen, reforzando la segregación socioeconómica de la matrícula. En virtud de lo anterior, se generarían escuelas con altos niveles de segregación, de manera que las familias pobres quedan relegadas a escuelas de mala calidad y las familias de altos ingresos a las mejores escuelas del país.
 
@@ -223,7 +240,7 @@ Por otra parte, @bellei_estudio_2013 ha señalado que la segregación socioecon�
 
 En síntesis, el sistema escolar chileno está dividido en segmentos sociales nítidos, como consecuencia de una serie de políticas educacionales que subyacen al sistema mismo. La combinación de procesos de admisión selectivos, la elección de los padres, el copago, y la segregación residencial serían elementos explicativos de la segregación escolar. En virtud de estos mecanismos, los colegios públicos tenderían a concentrar a la población socialmente más desaventajada, mientras la clase media-baja y clase media asistiría a escuelas particulares subvencionadas [@garcia-huidobro_desigualdad_2007]. 
 
-#Efecto(s) de la composición escolar en el rendimiento académico 
+# Efecto(s) de la composición escolar en el rendimiento académico 
 
 Habría dos mecanismos centrales mediante los cuales operaría la segregación social para producir efectos en los logros educacionales [@bellei_estudio_2013]: por un lado, a partir de la noción de capital social y, por otro lado, la teoría del efecto de los compañeros, objeto de interés en la presente investigación. De este modo, las inequidades en los resultados educacionales podrían estar asociadas a las consecuencias derivadas de la composición de los establecimientos, lugar en el cual los integrantes podrían tener un impacto beneficioso o negativo en los compañeros con los que comparten el aula escolar.
 
@@ -231,7 +248,7 @@ El modo en que operaría el impacto positivo de una mayor diversidad étnica, so
 
 No obstante, también es posible que la diversidad del aula tenga efectos inhibitorios de un buen rendimiento académico, siendo preferible una mayor homogeneidad interna. Tres mecanismos se han descrito respecto a este [@dronkers_positive_2013a]: (1) un cuerpo estudiantil más homogéneo incrementa las posibilidades de especialización de los profesores gracias a esa homogeneidad, propendiendo a una mayor efectividad de la escuela; (2) En aulas más homogéneas menos tiempo requiere ser gastado en generar puentes entre los estudiantes de diverso origen cultural y social, permitiendo destinar ese tiempo a mejorar la enseñanza y el aprendizaje de los estudiantes; (3) La confianza entre profesores, apoderados, y estudiantes, en contextos de un cuerpo estudiantil más homogéneo, es considerablemente mayor propiciando un mayor involucramiento de cada actor y, por ende, aumentando la efectividad de las escuelas en términos del aprendizaje resultante de los alumnos.  
 
-##Efecto de composición socioeconómica
+## Efecto de composición socioeconómica
  	
 Antes de indagar en la literatura sobre el tema, es necesario distinguir dos conceptos que con frecuencia aparecen en la literatura acerca de composición escolar o efecto par de los compañeros. Por un lado, está el concepto de composición y, por otro, el de heterogeneidad. Mientras el primero hace referencia a un promedio o proporción de un atributo determinado (por ejemplo, el nivel socioeconómico promedio de un aula), el segundo alude a la dispersión de alguna característica social definida [@dronkers_positive_2013a].
 
@@ -267,7 +284,7 @@ Fuente: Extraído de Taut & Escobar (2012): “El efecto de las características
 
 Por último, @ortiz_escuelas_2015 mediante un análisis residual de regresión compara los puntajes de individuos con un mismo background socioeconómico pero que se encuentran en diferentes colegios según si el colegio es homogéneo o heterogéneo socialmente. De este modo, el autor observa que las pérdidas en términos de puntaje debido a la asistencia a uno u otro tipo de establecimiento tendría una magnitud significativa. Según los hallazgos encontrados, los estudiantes de los dos primeros quintiles (es decir, el 40% más pobre) obtendrían entre 40 y 57 puntos más en la prueba SIMCE cuando se encuentran en una escuela de alumnos aventajados socialmente en comparación a lo que obtienen cuando estudian en un colegio de estudiantes desfavorecidos. Entonces, la inclusión social tendría un impacto positivo en los estudiantes más pobres sugiriendo la necesidad de implementar políticas educativas que promuevan la igualdad y equidad en el sistema escolar.
 
-##Efecto de composición de género
+## Efecto de composición de género
  
 Las diferencias de rendimiento según el género son de suma relevancia. Uno de los principales factores que ha sido aducido como predictor de las diferencias salariales entre hombres y mujeres es la brecha existente que tienen en el puntaje de matemática [@koedel_math_2012].
 
@@ -291,7 +308,7 @@ En el mismo campo de estudio, @taut_efecto_2012 encuentran que a las mujeres les
 
 Consistente con los resultados encontrados por Taut y Escobar, @radovicsendra_diferencias_2017 prueba que las diferencias de rendimiento en matemática entre niñas y niños son persistentes en el tiempo según la prueba SIMCE, pues tanto los alumnos de cuarto como de octavo básico muestran diferencias significativas. No obstante, el género del o la estudiante sólo logra explicar un 1% de la varianza de los resultados. Asimismo, las diferencias de género sólo alcanzan, como máximo, un 20% de una desviación estándar. Por último, un resultado novedoso que exhibe el estudio es la interacción significativa entre el género y el nivel socioeconómico de los estudiantes. En ese sentido, las diferencias de género en matemática van decreciendo a medida que los individuos tienen un mayor nivel socioeconómico.
 	
-##Efecto de composición migrante y étnica
+## Efecto de composición migrante y étnica
 
 La literatura internacional muestra que los estudiantes que sufren de mayor segregación étnica y racial tienen bajos rendimientos en tareas de tipo intelectual, baja motivación y bajos niveles de formación cívica [@mcewan_can_2008].
 
@@ -331,11 +348,11 @@ Asimismo, @cerda_situacion_2009 confirma que la población mapuche en la Región
 
 Por último, @canales_educational_2018 visualizan el efecto negativo que tiene la concentración étnica para los estudiantes indígenas. Al cargar con muchas inequidades los estudiantes de este grupo, pues concentran mayores niveles de desmotivación, la calidad de los profesores suele ser más baja, los recursos tanto económicos, culturales, como institucionales son deficientes, su aprendizaje se ve radicalmente afectado. Los mismos autores encuentran que sujetos de origen indígena en aulas diversas o mixtas socialmente tienen muchos mejores resultados en comparación a lo que obtienen en escuelas que acogen a un gran porcentaje de estudiantes indígenas.
 
-#Objetivos de investigación
+# Objetivos de investigación
 
 **Objetivo general de investigación:**
 
-Determinar en qué medida el grado de heterogeneidad de la composición escolar en términos culturales, socioeconómicos y de género, influye en el rendimiento en matemática y lenguaje de estudiantes mujeres, indígenas, migrantes, y de bajo nivel socioeconómico de II medio.
+Determinar en qué medida el grado de heterogeneidad de la composición escolar en términos culturales, socioeconómicos y de género, se relaciona con el rendimiento en matemática y lenguaje de estudiantes mujeres, indígenas, migrantes, y de bajo nivel socioeconómico de II medio.
 
 **Objetivos específicos:**
 
@@ -344,41 +361,42 @@ Determinar en qué medida el grado de heterogeneidad de la composición escolar 
 (3)	Evaluar la relación que tiene la heterogeneidad migrante/étnica de los establecimientos escolares con el rendimiento de indígenas y migrantes en matemática y lenguaje.
  
 
-#Hipótesis de investigación
+# Hipótesis de investigación
  
 (1)	Los alumnos de niveles socioeconómicos más bajos se ven más favorecidos de establecimientos heterogéneos socioeconómicamente que aquellos alumnos de niveles socioeconómicos más altos.
 (2)	Las mujeres se ven beneficiadas en términos del rendimiento que tienen en matemática cuando se encuentran en colegios no mixtos, mientras en lenguaje no hay un efecto significativo de una composición de estas características.
 (3)	Los indígenas y migrantes obtienen mejores resultados cuando se encuentran mezclados con individuos de origen étnico y nacionalidad diverso que cuando están homogéneamente concentrados.
 
-#Metodología
+# Metodología
 
-##Datos
+## Datos
 
 La investigación utilizará datos cuantitativos provenientes de fuentes secundarias. Particularmente, se usa información del Sistema Integral de Mejoramiento de la Calidad Educativa (SIMCE). El SIMCE es una prueba (que evalúa las habilidades en Matemática, Ciencias Naturales, Ciencias Sociales, y Lenguaje) que se aplica todos los años, de carácter censal, a estudiantes de 4to, 8vo, y 2do Medio, junto con una serie de cuestionarios que recolectan información de los profesores, apoderados, y los mismos alumnos. 
 
-Específicamente, son pruebas de conocimientos curriculares en varios subsectores en la cual no existe una escala estandarizada, sin embargo, para aspectos generales se considera una escala de un mínimo de 100 y un máximo de 400 puntos, con un promedio de 250 y una desviación estándar de 50 puntos. Además de la prueba de conocimientos curriculares, SIMCE recoge información de contexto a través de un cuestionario para los padres de los estudiantes testeados. Este cuestionario tiene como fin indagar sobre el nivel educacional de los padres, el ingreso del hogar, el nivel de satisfacción con el establecimiento, nacionalidad (tanto de padres/madres como alumnos), origen étnico (tanto de padres/madres como de alumnos), entre otros.
-
-Usaremos los datos correspondientes para los alumnos que rindieron la prueba en 2do Medio el año 2017. Es importante resaltar que los datos ya se encuentran a disposición para ser utilizados de modo que la realización de la investigación es completamente factible. La decisión de usar los datos SIMCE del año 2017 responde a la disponibilidad de los datos, pues si bien sería deseable usar datos más recientes, no tenemos acceso a ellos.
+Específicamente, son pruebas de conocimientos curriculares en varios subsectores en la cual no existe una escala estandarizada, sin embargo, para aspectos generales se considera una escala de un mínimo de 100 y un máximo de 400 puntos, con un promedio de 250 y una desviación estándar de 50 puntos. Además de la prueba de conocimientos curriculares, SIMCE recoge información de contexto a través de un cuestionario para los padres de los estudiantes testeados. Este cuestionario tiene como fin indagar sobre el nivel educacional de los padres, el ingreso del hogar, el nivel de satisfacción con el establecimiento, nacionalidad (tanto de padres/madres como alumnos), origen étnico (tanto de padres/madres como de alumnos), entre otros. Usaremos los datos correspondientes para los alumnos que rindieron la prueba en 2do Medio el año 2017. 
 
 Las dos fuentes de información usadas, esto es, el cuestionario de los padres y los datos sobre el puntaje de los estudiantes difieren en la cantidad de observaciones. Mientras esta última cuenta con información de 245.197 estudiantes que rindieron la prueba SIMCE, el cuestionario de los padres sólo logra cubrir a 169.824 estudiantes. Como consecuencia de lo anterior, se trabaja, en principio, con 169.824 observaciones. Luego de la limpieza de los datos y considerando los datos pérdidos la muestra con la cual realizamos los analisis es de 147.979 estudiantes distribuidos en 2901 establecimientos a nivel nacional.
 
-##Variables 
+## Variables 
 
 Tabla 1: Variables independientes a nivel escuela
 
-![](input/images/VI_escuela.jpg)
+![](input/images/VI_ESCUELA.png)
 
+En la tabla adjunta podemos advertir las variables independientes sustantivas de interés. En cada una de ellas, se especifica la forma de cálculo, las categorías de respuesta resultante, y la fuente de información utilizada para extraerlas. Aquí solo enunciaremos cada uno de estos elementos, pues en la sección metodológica se detallará la forma de construcción de variables, las respuestas posibles, y todos los elementos asociados a nuestras variables teóricamente relevantes. 
  
 Tabla 2: Variables independientes a nivel individual  
-![](input/images/VI_individual.jpg)
+![](input/images/VI_INDIVIDUO.png)
 
-Variables Dependientes: Puntaje obtenido en la Prueba SIMCE Matemática y Prueba SIMCE Lenguaje 2017
+Por otra parte, tenemos las variables independientes sustantivas de orden individual. Al tratarse de datos jerarquizados o de dos niveles, es fundamental distinguir las variables que corresponden a cada uno de los niveles. Mientras en la tabla 1 se mostraron las variables asociadas a los establecimientos escolares, la tabla 2 nos exhibe las variables a nivel individual. Como podrán notar, estas revisten de mayor simplicidad, tanto en su forma de cálculo como en las categorías de respuesta.
 
-##Análisis 
+Por último, esta investigación tiene como variables dependientes el puntaje obtenido en la Prueba SIMCE Matemática y el obtenido en la Prueba SIMCE Lenguaje 2017
+
+## Análisis 
 
 Se estimarán modelos lineales jerárquicos, más conocidos como modelos multinivel para examinar la relación entre las variables a nivel establecimiento escolar (nivel 2) y variables a nivel estudiante (nivel 1), con el puntaje en prueba SIMCE de Matemática y Lenguaje que muestran los estudiantes. La ventaja de este método de estimación radica en la posibilidad de descomponer la varianza de los puntajes de los alumnos entre escuelas, por un lado, y dentro de las escuelas por otro. Lo anterior es posible debido a que los métodos multinivel consideran la estructura anidada de los datos (en este caso alumnos que se encuentran anidados en establecimientos escolares). En ese mismo sentido, permite modelar independientemente la variabilidad en los distintos niveles de agregación y la interacción entre estos niveles.
 
-##Descripción de variables
+## Descripción de variables
 
 ```{r, echo=FALSE, results='hide'}
 load("input/data/proc/data.RData")
@@ -403,9 +421,18 @@ pacman::p_load(dplyr, #Manipulacion de datos
               lm.beta,
               sjlabelled,
               plyr) 
-               
+  
 
 ```
+
+
+```{r, echo=FALSE, results='hide'}
+   library(tinytex)     
+options(tinytex.verbose = TRUE)
+
+
+```
+
 
 ```{r, echo=FALSE, results='hide'}
 stargazer(data, title = "Descriptivos nivel estudiante", type='html', digits = 3)
@@ -423,17 +450,24 @@ data1= data %>% select(puntaje_leng, puntaje_mate, ingresos, sexo, cultura, educ
 
 
 
-###Variables nivel estudiante
+### Variables nivel estudiante
 
 ```{r, echo=FALSE, results='asis'}
-print(dfSummary(data1, plain.ascii = FALSE, graph.magnif = 0.75, headings=FALSE), method="render")
+print(dfSummary(data1, plain.ascii = FALSE, graph.magnif = 0.75, headings=FALSE, digits=2), method="render")
 
 
 ```
 
-Si observamos la tabla, contiene todas las variables a nivel estudiante que son de interés en este estudio. Respecto al sexo de los individuos, tenemos que hay casi la misma proporción de hombres y mujeres en la muestra considerada. Los ingresos del hogar, a su vez, utilizados para medir el nivel socioeconomico de los alumnos se construyo a partir de dos variables siguiendo el esquema descrito a continuación: Por una parte, contamos con la variable de ingresos por tramo (siendo el tramo de menor ingreso equivalente a "ganar menos de $100.000", y el tramo de mayor ingreso igual a ganar más de $2.200.000, con otros trece tramos entre ellos), por otra, con la cantidad de habitantes del hogar. Se imputó a cada estudiante el valor medio entre el rango inferior y superior de cada tramo y, para el caso de la categoría más baja y más alta se imputó la cantidad de $50.000 y $3.000.000 respectivamente. Posteriormente, se dividió el monto en cuestión por la cantidad de habitantes del hogar del estudiante. 
+```{r, echo=FALSE, results='asis'}
+stargazer(data, title = "Descriptivos nivel estudiante", type='latex', digits = 3)
 
-Si observamos la distribución de la variable podemos notar nítidamente que hay una marcada concentración de los datos hacia la izquierda, cuya asimtería podemos explicar a partir de los bajos ingresos, en promedio, de la población chilena. Más especificamente, la media nacional de ingresos del hogar per cápita alcanza el valor de casi 170 mil pesos, mientras que la mitad de la población gana menos de 110 mil, dando cuenta de la existencia de ingresos mediano-bajos a nivel país. La asmitería es la variable es muy elevada, con una fuerte concentración de los individuos a la izquierda de la distribución. 
+
+```
+
+
+Si observamos la tabla, contiene todas las variables a nivel estudiante que son de interés en este estudio. Respecto al sexo de los individuos, tenemos que hay casi la misma proporción de hombres y mujeres en la muestra considerada. Los ingresos del hogar, a su vez, utilizados para medir el nivel socioeconomico de los alumnos se construyó a partir de dos variables siguiendo el esquema descrito a continuación: Por una parte, contamos con la variable de ingresos por tramo (siendo el tramo de menor ingreso equivalente a "ganar menos de $100.000", y el tramo de mayor ingreso igual a ganar más de $2.200.000, con otros trece tramos entre ellos), por otra, con la cantidad de habitantes del hogar. Se imputó a cada estudiante el valor medio entre el rango inferior y superior de cada tramo y, para el caso de la categoría más baja y más alta se imputó la cantidad de $50.000 y $3.000.000 respectivamente. Posteriormente, se dividió el monto en cuestión por la cantidad de habitantes del hogar del estudiante. 
+
+A partir de la distribución de la variable podemos notar nítidamente que hay una marcada concentración de los datos hacia la izquierda, cuya asimetría podemos explicar a partir de los bajos ingresos, en promedio, de la población chilena. Más especificamente, la media nacional de ingresos del hogar per cápita alcanza el valor de casi 170 mil pesos, mientras que la mitad de la población gana menos de 110 mil, dando cuenta de la existencia de ingresos mediano-bajos a nivel país. La asimetría de la variable es muy elevada, con una fuerte concentración de los individuos a la izquierda de la distribución. 
 
 Por su parte, para medir el origen cultural de los estudiantes (considerando etnia y nacionalidad), generamos tres variables. Primeramente, la etnia y nacionalidad por separado de modo que podamos cuantificar la cantidad de estudiantes indigenas y migrantes que hay en la matricula secundaria a nivel nacional. Sólo u 4.5% de la matricula es de una nacionalidad diferente a la chilena, mientras un 16.6% tiene origen índigena. 
 
@@ -447,7 +481,7 @@ Desde el 0 al 13 son los años de estudio donde el 0 indica ningún año de estu
 
 En último término, cabe consignar que se tomó la decisión de no recodificar ingreso y nivel educacional como categoricas en virtud del foco que tiene el estudio en evaluar el impacto de la heterogeneidad social en el rendimiento. Si trataramos estas dos variables como categoricas perderiamos mucha variabilidad de cada una de ellas dejando de capturar la real magnitud del impacto que tiene en el rendimiento academico de los estudiantes. A continuación, veamos las estadísticas descriptivas de nuestras variables consideradas a nivel de los establecimientos escolares.
 
-###Variables nivel establecimiento escolar
+### Variables nivel establecimiento escolar
 
 ```{r, echo=FALSE, results='hide', warning=FALSE}
 
@@ -458,7 +492,12 @@ data_agg_d= data %>% group_by(rbd) %>% summarise_all(funs(mean)) %>% as.data.fra
 
 
 ```{r, echo=FALSE, results='asis'}
-stargazer(data_agg_d, title= "Descriptivos de establecimientos", type = 'html')
+stargazer(data_agg_d, title= "Descriptivos de establecimientos", type="latex")
+```
+
+```{r, echo=FALSE, results='hide'}
+print(dfSummary(data_agg_d, plain.ascii = FALSE, graph.magnif = 0.75, headings=FALSE), method='render')
+
 ```
 
 
@@ -469,7 +508,7 @@ Por otro lado, es interesante mencionar que, contrario a lo que ocurre con la na
 
 Como el foco de esta investigación es la relación entre las diferentes dimensiones de la heterogeneidad social y el rendimiento academico, para cada una de ellas se resolvió una forma diferente de medir dicha heterogeneidad. Para el caso de la variable ingresos, que es tratada como cuantitativa, se utiliza la desviación estándar de cada uno de los establecimientos. La desviación estandar es una buena medida de heterogeneidad en la medida que calcula la dispersión de los datos y, de esa forma, es capaz de capturar cuánto se alejan en promedio cada uno de los datos de la media. Así, un colegio que tenga una mayor desviación estándar tendrá una mayor dispersión en lo que refiere a los ingresos de los estudiantes y, por lo tanto, será más heterogéneo. Debido al cáracter de las otras variables con las cuales se quiere medir heterogeneidad (cultural, étnica, y de género) procedimos a elaborar otra forma de medirla.
 
-En consecuencia, en el caso de las variables dicotómicas sexo, etnia, y nacionalidad se construyeron perfiles de establecimientos a partir del método de "Jenks". Este modo de clasificar o agrupar una variable consiste en la creación de categorías a partir de determinada variable siguiendo un criterio de minimización de la varianza al interior de cada una de esas categorías o grupos y la maximización entre ellas. En consecuencia, el algoritmo optimizará (formará los tramos óptimos para cada categoría) bajo las dos restricciones mencionadas. La virtud de este metodo radica en que no requiere de segundas variables para la creación de las categorías en aquella(s) de interés.
+En consecuencia, en el caso de las variables dicotómicas sexo, etnia, y nacionalidad se construyeron perfiles de establecimientos a partir del método de "Jenks". Este modo de clasificar o agrupar una variable consiste en la creación de categorías a partir de determinada variable siguiendo un criterio de minimización de la varianza al interior de cada una de esas categorías o grupos y la maximización entre ellas. Así, el algoritmo optimizará (formará los tramos óptimos para cada categoría) bajo las dos restricciones mencionadas. La virtud de este metodo radica en que no requiere de segundas variables para la creación de las categorías en aquella(s) de interés.
 
 Antes de aplicar el algoritmo de Jenks, se calculó, por cada establecimiento, la proporción de mujeres, índigenas, y migrantes. Luego, con esa información clasificamos a cada una de las tres variables mencionadas según tres categorías o grupos: Homogeneos con alta cantidad de estudiantes de la categoría de referencia, homogeneos con baja cantidad de estudiantes de la categoría de referencia y, por último, heterogeneos que se componen de una cantidad equilibrada de ambas categorías. Veamos con más detalle el puntaje de corte establecido para cada una de las categorías y, luego, según esos puntajes, la distribución porcentual de los establecimientos según cada una de las variables de interés.
 
@@ -479,17 +518,74 @@ Tabla 3: Puntajes de corte para cada variable a partir del método de Jenks
 
 Fuente: Elaboración propia
 
+```{r, echo=FALSE, results='hide'}
+
+##dividimos para escalamiento de variables
+data_agg$m_ingresos= (data_agg$m_ingresos)/10000
+data_agg$sd_ingresos=(data_agg$sd_ingresos)/10000
+
+
+data_agg= round(data_agg, digits = 2)
+
+##agregamos variables indepe de perfiles de establecimientos
+
+data_agg$sexo_j = ifelse(data_agg$num_mujeres<=0.39, "homogeneo bajo", ifelse((data_agg$num_mujeres>0.39) & (data_agg$num_mujeres<=0.72), "heterogeneo", "homogeneo alto")) 
+
+data_agg$sexo_j= as_factor(data_agg$sexo_j)
+
+data_agg$cultura_j = ifelse(data_agg$div_cultura<=0.19, "homogeneo bajo", ifelse((data_agg$div_cultura>0.20) & (data_agg$div_cultura<=0.44), "heterogeneo", "homogeneo alto")) 
+
+data_agg$cultura_j= as_factor(data_agg$cultura_j)
+
+data_agg$nacionalidad_j = ifelse(data_agg$p_nacionalidad<0.07, "homogeneo bajo", ifelse((data_agg$p_nacionalidad>=0.07) & (data_agg$p_nacionalidad<=0.23), "heterogeneo", "homogeneo alto")) 
+
+data_agg$nacionalidad_j= as_factor(data_agg$nacionalidad_j)
+
+data_agg$etnia_j = ifelse(data_agg$p_etnia<=0.16, "homogeneo bajo", ifelse((data_agg$p_etnia>0.16) & (data_agg$p_etnia<=0.41), "heterogeneo", "homogeneo alto")) 
+
+data_agg$etnia_j= as_factor(data_agg$etnia_j)
+
+```
+
+
 Tabla 4: Distribución porcentual de establecimientos según grado de heterogeneidad
 
-![](input/images/distribucion_establecimientos.png)
+```{r, echo=FALSE, results='hide'}
+data_agg_d$sexo_j = ifelse(data_agg_d$sexo<=0.39, "Homogéneo bajo", ifelse((data_agg_d$sexo>0.39) & (data_agg_d$sexo<=0.72), "Heterogéneo", "Homogéneo alto")) 
 
-Fuente: Elaboración propia
+data_agg_d$nacionalidad_j = ifelse(data_agg_d$nacionalidad<0.07, "Homogéneo bajo", ifelse((data_agg_d$nacionalidad>=0.07) & (data_agg_d$nacionalidad<=0.23), "Heterogéneo", "Homogéneo alto")) 
 
-Con la información presente en las tablas, podemos advertir con precisión, primero, el rango de porcentajes para poder determinar si cierta proporción de mujeres/indígenas/migrantes en el aula representa un colegio homogéneo bajo, heterogéneo, u homogéneo alto en la categoría social correspondiente. Entonces, por ejemplo, un establecimiento que aloja un 20% de mujeres sería clasificado como homogéneo bajo (en términos de género) y un establecimiento con el mismo porcentaje de migrantes sería catalogado como heterogéneo (en términos "migratorios"). 
+data_agg_d$etnia_j = ifelse(data_agg_d$etnia<=0.16, "Homogéneo bajo", ifelse((data_agg_d$etnia>0.16) & (data_agg_d$etnia<=0.41), "Heterogéneo", "Homogéneo alto")) 
+
+data_agg_d$etnia_j= as_factor(data_agg_d$etnia_j)
+
+data_agg_d$nacionalidad_j= as_factor(data_agg_d$nacionalidad_j)
+
+data_agg_d$sexo_j= as_factor(data_agg_d$sexo_j)
+
+```
+
+
+
+```{r, echo=FALSE, results='asis'}
+
+plot_frq(data=data_agg_d$sexo_j, title="Distribución colegios según composición de género", axis.title = "Tipo de establecimiento")
+
+plot_frq(data=data_agg_d$etnia_j, title="Distribución colegios según composición étnica", axis.title = "Tipo de establecimiento")
+
+plot_frq(data=data_agg_d$nacionalidad_j, title="Distribución colegios según composición migratoria", axis.title = "Tipo de establecimiento")
+
+```
+
+
+
+
+
+Con la información presente en los gráficos de barra, podemos advertir con precisión, primero, el rango de porcentajes para poder determinar si cierta proporción de mujeres/indígenas/migrantes en el aula representa un colegio homogéneo bajo, heterogéneo, u homogéneo alto en la categoría social correspondiente. Entonces, por ejemplo, un establecimiento que aloja un 20% de mujeres sería clasificado como homogéneo bajo (en términos de género) y un establecimiento con el mismo porcentaje de migrantes sería catalogado como heterogéneo (en términos "migratorios"). 
 
 Ahora bien, la distribución porcentual según cada variable difere significativamente por cada atributo social considerado. Mientras en el caso del sexo de los estudiantes un 74,7% del total de establecimientos (que totalizan, en términos absolutos, 2901 como vimos en los descriptivos) es heterogéneo relativo al género de los estudiantes, sólo un 19,9% lo es en relación a la nacionalidad de los alumnos. 
 
-##Correlaciones 
+## Correlaciones 
 
 ```{r, echo=FALSE, results='hide'}
 cormat= data %>% select(ingresos, educacion, puntaje_mate, puntaje_leng) %>% cor()
@@ -508,18 +604,65 @@ El gráfico de correlaciones entre variables cuantitativas a nivel estudiante (i
 
 Las correlaciones entre las dos variables independientes cuantitativas a nivel estudiante no es lo suficientemente alta como para poder establecer que están midiendo lo mismo. En consecuencia, está empiricamente justificado la inclusión de ambas variables en el modelo por separado.
 
-#Modelos 
+## Gráficos bivariados
 
+```{r, echo=FALSE, results='hide'}
+colegios<-read_dta("input/data/original/simce2m2017_rbd_publica_final.dta")
+
+colegios= colegios %>% select(rbd, cod_depe2)
+
+data_agg_sc= merge(colegios,data_agg_d, by="rbd")
+
+cod_depe3=as.character(data_agg_sc$cod_depe2)
+cod_depe3[cod_depe3=="1"]="red"
+cod_depe3[cod_depe3=="2"]="blue"
+cod_depe3[cod_depe3=="3"]="green"
+
+data_agg_sc=as.data.frame(data_agg_sc)
+
+  Deplot= ggplot(data_agg_sc, aes(x=puntaje_mate, y=puntaje_leng, colours(cod_depe3))) +
+  geom_point(alpha=0.4, col=factor(cod_depe3)) +
+  scale_color_manual(values=c("red", "blue", "green"),
+                     labels=c("Municipal", "Particular Subvencionado", "Particular Pagado"))
+  print(Deplot + ggtitle("Puntaje SIMCE según dependencia administrativa"))
+
+  ##para incluir variable dependencia adminsitrativo en modelos
+
+data_agg= merge(data_agg, colegios, by="rbd")
+  
+
+```
+
+Si evaluamos el gráfico podremos notar la fuerte asociación existente entre los puntajes SIMCE y la dependencia administrativa de los establecimientos escolares. Cada color representa un tipo de dependencia diferente, donde el rojo es para colegios Municipales, el azul para colegios subvencionados, y el verde para colegios particulares pagados. De este modo, existe una jerarquización marcada por puntaje donde aquellos privados obtienen un mejor rendimiento tanto en matemática como en lenguaje, mientras aquellos municipales se concentran en la parte más baja del gráfico. En definitiva, se consolida la idea de que hay una dependencia contextual de los datos, adicional a las correlaciones observadas a nivel estudiante en virtud de la varianza que hay en los puntajes SIMCE entre los diferentes grupos considerados (dependencia administrativa, ingreso, y educación). 
+
+
+
+
+```{r, echo=FALSE, results='asis'}
+options(scipen=999)
+png(file="output/graphs/scatter1.png")
+
+plot_scatter(data_agg_sc, educacion, puntaje_mate)
+
+png(file="output/graphs/scatter2.png", width=600, height=350)
+
+plot_scatter(data_agg_sc, ingresos, puntaje_mate)
+
+
+```
+
+
+
+
+En el caso de los gráficos para el promedio de ingreso por escuela y promedio educativo, los puntajes de los colegios se asocian positivamente con estas dos variables. La educación tiene una relación nítidamente lineal con el promedio SIMCE que tiene cada uno de los colegios, mientras en el caso de la variable ingreso una función concava describe de mejor modo el comportamiento de los datos. Por ello, es esperable que haya un impacto significativo de ambas variables en el rendimiento de los alumnos, cuya evaluación haremos a partir de la estimación de los modelos que vienen a continuación.  
+
+# Modelos 
+
+## Modelo individual, grupal, y multinivel
 
 
 ```{r, echo=FALSE, results='hide'}
 
-##dividimos para escalamiento de variables
-data_agg$m_ingresos= (data_agg$m_ingresos)/10000
-data_agg$sd_ingresos=(data_agg$sd_ingresos)/10000
-
-
-data_agg= round(data_agg, digits = 2)
 
 ##agregamos variables indepe de perfiles de establecimientos
 
@@ -558,12 +701,15 @@ reghelper::ICC(results_01)
 
 ```
 
-
-En primer lugar, antes de comenzar a describir los párametros de los modelos estimados, es importante mencionar la cantidad de varianza de los puntajes de cada una de las pruebas que hay entre las escuelas chilenas (técnicamente denominada correlación intraclase que se obtiene a partir del modelo nulo). Siguiendo los resultados, tenemos que un 47% de la varianza del puntaje SIMCE Matemática está entre las escuelas. Para el caso de lenguaje la varianza entre escuelas es más baja, del orden de 29%. En consecuencia, se torna pertinente modelar los resultados en la prueba SIMCE considerando la estructura anidada de los datos, pues una porción importante de la varianza de los resultados se explica por la pertenencia a establecimientos escolares.
-
-##Modelo individual, grupal, y multinivel
-
 ```{r, echo=FALSE, results='hide'}
+mean(data_agg$educacion)
+
+##centramos a la gran media la variable promedio educacion del establecimiento
+
+data_agg$m_educacion_c= data_agg$m_educacion - 12.23
+
+data_agg$cod_depe2=as_factor(data_agg$cod_depe2)
+
 
 ##modelo individual, grupal, y multinivel para matematica
 ##individual
@@ -572,12 +718,13 @@ screenreg(results_1)
 
 
 ## grupal
-results_2= lmer(puntaje_mate ~ 1 + m_ingresos + sd_educacion + sd_ingresos + m_educacion + nacionalidad_j + etnia_j + sexo_j + (1|rbd), data=data_agg)
+results_2= lmer(puntaje_mate ~ 1 + m_ingresos + sd_educacion + sd_ingresos + m_educacion_c + nacionalidad_j + etnia_j + sexo_j + cod_depe2 + (1|rbd), data=data_agg)
 
 screenreg(results_2)
 
+
 ##multinivel
-results_3 = lmer(puntaje_mate ~ 1 + log(ingresos) + sexo + educacion + nacionalidad + etnia + sd_ingresos + m_educacion + sd_educacion + m_ingresos + nacionalidad_j + etnia_j + sexo_j + (1|rbd), data = data_agg)
+results_3 = lmer(puntaje_mate ~ 1 + log(ingresos) + sexo + educacion + nacionalidad + etnia + sd_ingresos + m_educacion_c + sd_educacion + m_ingresos + nacionalidad_j + etnia_j + sexo_j + cod_depe2 + (1|rbd), data = data_agg)
 
 screenreg(results_3)
 
@@ -598,12 +745,12 @@ screenreg(results_4, naive=TRUE)
 
 
 ## grupal
-results_5= lmer(puntaje_leng ~ 1 + m_ingresos + sd_educacion + sd_ingresos + m_educacion + nacionalidad_j + etnia_j + sexo_j + (1|rbd), data=data_agg)
+results_5= lmer(puntaje_leng ~ 1 + m_ingresos + sd_educacion + sd_ingresos + m_educacion_c + nacionalidad_j + etnia_j + sexo_j + cod_depe2 + (1|rbd), data=data_agg)
 
 screenreg(results_5)
 
 ##multinivel
-results_6 = lmer(puntaje_leng ~ 1 + log(ingresos) + sexo + educacion + nacionalidad + etnia + sd_ingresos + m_educacion + sd_educacion + m_ingresos + nacionalidad_j + etnia_j + sexo_j + (1|rbd), data = data_agg)
+results_6 = lmer(puntaje_leng ~ 1 + log(ingresos) + sexo + educacion + nacionalidad + etnia + sd_ingresos + m_educacion_c + sd_educacion + m_ingresos + nacionalidad_j + etnia_j + sexo_j + cod_depe2 + (1|rbd), data = data_agg)
 
 screenreg(results_6, naive=TRUE)
 
@@ -614,13 +761,12 @@ screenreg(results_6, naive=TRUE)
 
 ```
 
-
-```{r, echo=FALSE, results='asis'}
+```{r, echo=FALSE, results='hide'}
 ##tabla matematica
 
 htmlreg(list(results_1, results_2, results_3),
     custom.model.names = c("Individual","Grupal","Multinivel"),
-    custom.coef.names = c("Intercepto", "Ingresos" ,"Mujer", "Educación", "Migrante", "Indígena", "Promedio ingresos", "Heterogeneidad educativa", "Heterogeneidad social", "Promedio nivel educativo", "Homogeneidad migratoria alta", "Homogeneidad migratoria baja", "Homogeneidad étnica alta", "Homogeneidad étnica baja", "Alta homogeneidad género", "Baja homogeneidad género" ),
+    custom.coef.names = c("Intercepto", "Ingresos" ,"Mujer", "Educación", "Migrante", "Indígena", "Promedio ingresos", "Heterogeneidad educativa", "Heterogeneidad social", "Promedio nivel educativo", "Homogeneidad migratoria alta", "Homogeneidad migratoria baja", "Homogeneidad étnica alta", "Homogeneidad étnica baja", "Alta homogeneidad género", "Baja homogeneidad género", "Particular Subvencionado", "Particular Pagado" ),
     custom.note = "%stars. Errores estándar en paréntesis",
     caption="Comparación modelos SIMCE Matemática",
     caption.above=TRUE,
@@ -628,6 +774,26 @@ htmlreg(list(results_1, results_2, results_3),
     doctype = FALSE)
 
 ```
+
+
+```{r, echo=FALSE, results='asis'}
+
+texreg(list(results_1, results_2, results_3),
+    custom.model.names = c("Individual","Grupal","Multinivel"),
+    custom.coef.names = c("Intercepto", "Ingresos" ,"Mujer", "Educación", "Migrante", "Indígena", "Promedio ingresos", "Heterogeneidad educativa", "Heterogeneidad social", "Promedio nivel educativo", "Homogeneidad migratoria alta", "Homogeneidad migratoria baja", "Homogeneidad étnica alta", "Homogeneidad étnica baja", "Alta homogeneidad género", "Baja homogeneidad género", "Particular Subvencionado", "Particular Pagado" ),
+    custom.note = "%stars. Errores estándar en paréntesis",
+    caption="Comparación modelos SIMCE Matemática",
+    caption.above=TRUE,
+    digits=2,
+    doctype = FALSE,
+    longtable = FALSE,
+    scalebox = 0.7)
+
+```
+
+\pagebreak
+
+En primer lugar, antes de comenzar a describir los párametros de los modelos estimados, es importante mencionar la cantidad de varianza de los puntajes de cada una de las pruebas que hay entre las escuelas chilenas (técnicamente denominada correlación intraclase que se obtiene a partir del modelo nulo). Siguiendo los resultados, tenemos que un 47% de la varianza del puntaje SIMCE Matemática está entre las escuelas. Para el caso de lenguaje la varianza entre escuelas es más baja, del orden de 29%. En consecuencia, se torna pertinente modelar los resultados en la prueba SIMCE considerando la estructura anidada de los datos, pues una porción importante de la varianza de los resultados se explica por la pertenencia a establecimientos escolares.
 
 Si estimamos el modelo de regresión sólo considerando las variables individuales los datos nos muestran que todas las variables que teoricamente formulamos como potencialmente explicativas del rendimiento academico en matemática lo son empiricamente. En ese sentido, todas las variables incluidas son estadisticamente significativas con un nivel de confianza equivalente a un 99%. No obstante, es importante advertir que el comportamiento de los coeficientes difiere según la prueba SIMCE considerada. 
 
@@ -643,10 +809,28 @@ En lo que refiere a la composición de género de los establecimientos escolares
 
 El modelo multinivel, que considera tanto las variables individuales como las grupales simultaneamente, tiene coeficientes similares a los obtenidos cuando estimamos los modelos por separado. En esa línea, todos mantienen su sentido, y su magnitud tiene diferencias casi imperceptibles.
 
-```{r, echo=FALSE, results='asis'}
+```{r, echo=FALSE, results='hide'}
+##tabla lenguaje 
+
 htmlreg(list(results_4, results_5, results_6),
     custom.model.names = c("Individual","Grupal","Multinivel"),
-    custom.coef.names = c("Intercepto", "Ingresos" ,"Mujer", "Educación", "Migrante", "Indígena", "Promedio ingresos", "Heterogeneidad educativa", "Heterogeneidad social", "Promedio nivel educativo", "Homogeneidad migratoria alta", "Homogeneidad migratoria baja", "Homogeneidad étnica alta", "Homogeneidad étnica baja", "Alta homogeneidad género", "Baja homogeneidad género" ),
+    custom.coef.names = c("Intercepto", "Ingresos" ,"Mujer", "Educación", "Migrante", "Indígena", "Promedio ingresos", "Heterogeneidad educativa", "Heterogeneidad social", "Promedio nivel educativo", "Homogeneidad migratoria alta", "Homogeneidad migratoria baja", "Homogeneidad étnica alta", "Homogeneidad étnica baja", "Alta homogeneidad género", "Baja homogeneidad género", "Particular Subvencionado", "Particular Pagado" ),
+    custom.note = "%stars. Errores estándar en paréntesis",
+    caption="Comparación modelos SIMCE Lenguaje",
+    caption.above=TRUE,
+    digits=2,
+    doctype = FALSE)
+
+
+```
+
+```{r, echo=FALSE, results='asis'}
+
+##tabla lenguaje 
+
+texreg(list(results_4, results_5, results_6),
+    custom.model.names = c("Individual","Grupal","Multinivel"),
+    custom.coef.names = c("Intercepto", "Ingresos" ,"Mujer", "Educación", "Migrante", "Indígena", "Promedio ingresos", "Heterogeneidad educativa", "Heterogeneidad social", "Promedio nivel educativo", "Homogeneidad migratoria alta", "Homogeneidad migratoria baja", "Homogeneidad étnica alta", "Homogeneidad étnica baja", "Alta homogeneidad género", "Baja homogeneidad género", "Particular Subvencionado", "Particular Pagado" ),
     custom.note = "%stars. Errores estándar en paréntesis",
     caption="Comparación modelos SIMCE Lenguaje",
     caption.above=TRUE,
@@ -657,16 +841,19 @@ htmlreg(list(results_4, results_5, results_6),
 ```
 
 
+
 En el caso de la prueba SIMCE de lenguaje, hay algunas diferencias considerables atendiendo a los párametros estimados. Uno de los elementos más distinguidos de los regresores es que el ser mujer, a diferencia de lo que ocurría en matemática, está asociado a una ganancia de puntaje SIMCE, teniendo como categoría de referencia a los hombres. A su vez, al igual que en matemática, la heterogeneidad en los ingresos de las familias tiene un impacto negativo en el puntaje SIMCE, contrario a la hipótesis formulada. Respecto de nuestras variables independientes a nivel establecimiento escolar ligadas a los perfiles de establecimientos, tenemos algo similar a lo observado en los modelos de regresión estimados para la prueba de Mátematica. 
 
 Los colegios con alta proporción de mujeres siguen teniendo mejor rendimiento que los heterogeneos y que los poco homogéneos (o baja proporción de mujeres en la sala de clases). En el caso de los establecimientos agrupados segun el nivel de heterogeneidad migratoria, los datos nos muestran que los que obtienen mejores resultados son aquellas con baja concentración de migrantes (u homogéneos bajo usando la jerga habitual). Para efecto del tipo de composición étnica de los colegios, los modelos son claros en exhibir que aquellos colegios con alta concentración de indígenas son los mejor evaluados comparado tanto con establecimientos heterogeneos etnicamente hablando como homogéneo bajo.
 
 
 
-##Modelos multinivel con interacción entre niveles
+## Modelos multinivel con interacción entre niveles
+
+En la siguiente sección procederemos a evaluar si es que existe algún efecto adicional de los tipos de composición social por pertenecer a algún género, etnia, y nacionalidad. Concretamente, siguiendo las hipótesis de investigación contrastaremos tres aseveraciones empíricas contenidas en ellas. En primer lugar, evaluaremos si la composición de género de los establecimientos tiene un efecto diferente en las mujeres; en segundo lugar, si la composición étnica de las escuelas afecta de modo diferenciado a estudiantes índigenas; y, por último, si acaso la composición migratoria de los colegios tiene algún tipo de efecto adicional en la población migrante. Es importante recordar que en los modelos de regresión ya estimados sólo contrastamos la idea de si la composición social (en los tres tipos considerados) afecta el rendimiento acádemico de los alumnos sin distinguir si el efecto era diferente para las mujeres, índigenas, y migrantes. 
 
 
-###Interacción entre composición socioecónomica y nivel socioeconómico bajo
+### Interacción entre composición socioecónomica y nivel socioeconómico bajo
 
 ```{r, echo=FALSE, results='hide'}
 
@@ -687,12 +874,12 @@ data_agg$bajo_nse= ifelse(data_agg$quintiles<=2, 0, 1)
 
 ```{r, echo=FALSE, results='hide'}
 ##probamos interaccion bajo nse mean ingresos matematica
-results_8 = lmer(puntaje_mate ~ 1 + m_ingresos + bajo_nse + m_ingresos*bajo_nse + log(ingresos) + sexo + educacion + nacionalidad + etnia + m_educacion + sd_educacion + sd_ingresos + nacionalidad_j + etnia_j + sexo_j + (1|rbd), data = data_agg)
+results_8 = lmer(puntaje_mate ~ 1 + m_ingresos + bajo_nse + m_ingresos*bajo_nse + log(ingresos) + sexo + educacion + nacionalidad + etnia + m_educacion_c + sd_educacion + sd_ingresos + nacionalidad_j + etnia_j + sexo_j + cod_depe2 + (1|rbd), data = data_agg)
 
 screenreg(results_8, naive=TRUE)
 
 ##probamos interaccion bajo nse mean ingresos lenguaje
-results_9 = lmer(puntaje_leng ~ 1 + m_ingresos + bajo_nse + m_ingresos*bajo_nse + log(ingresos) + sexo + educacion + nacionalidad + etnia + m_educacion + sd_educacion + sd_ingresos + nacionalidad_j + etnia_j + sexo_j + (1|rbd), data = data_agg)
+results_9 = lmer(puntaje_leng ~ 1 + m_ingresos + bajo_nse + m_ingresos*bajo_nse + log(ingresos) + sexo + educacion + nacionalidad + etnia + m_educacion_c + sd_educacion + sd_ingresos + nacionalidad_j + etnia_j + sexo_j + cod_depe2 + (1|rbd), data = data_agg)
 
 screenreg(results_9, naive=TRUE)
 ```
@@ -705,24 +892,24 @@ plot_model(results_9, type="int")
 ```
 
 
-Como vimos en los modelos de regresión tanto para lenguaje como matemática, el efecto de la heterogeneidad socioecónomica de los colegios medido según el ingreso per cápita del hogar es negativo. Con ello, se refuta la hipótesis propuesta acerca del efecto positivo que proyectabamos tenía esta, no obstante, si hacemos interactuar dicha variable con el nivel socioeconómico de los estudiantes (que o ingresamos como dicotómico para comparar los dos quintiles más pobres con los tres más ricos, siendo 0 los primeros y 1 los segundos) resulta que se modera el efecto negativo de la heterogeneidad para el caso de los más pobres. En otras palabras, sabiendo que la heterogeneidad es negativa, esta es menos perjudicial para los alumnos más pobres. 
+Como vimos en los modelos de regresión tanto para lenguaje como matemática, el efecto de la heterogeneidad socioecónomica de los colegios medido según el ingreso per cápita del hogar es negativo. Con ello, se refuta la hipótesis propuesta acerca del efecto positivo que proyectabamos tenía esta, no obstante, si hacemos interactuar dicha variable con el nivel socioeconómico de los estudiantes (que la ingresamos como dicotómica para comparar los dos quintiles más pobres con los tres más ricos, siendo 0 los primeros y 1 los segundos) resulta que se modera el efecto negativo de la heterogeneidad para el caso de los más pobres. En otras palabras, sabiendo que la heterogeneidad es negativa, esta es menos perjudicial para los alumnos más pobres. 
 
 
 Ahora bien, complementando este resultado, el promedio del nivel socioeconomico de los colegios tiene consecuencias positivas sobre el rendimiento tanto en matemática como en lenguaje. Aún más, si la hacemos interactuar con el nivel socioeconómico de los estudiantes, podremos apreciar que los más pobres se ven más beneficiados que los más ricos (comparativamente hablando, pues son los tres quintiles con más ingresos) a medida que el nivel de ingreso promedio del colegio es más alto, en términos del puntaje que tienen en la prueba tanto de matemática como de lenguaje. Si examinamos el gráfico, vemos que la recta predicha para el nivel socioeconómico bajo tiene una pendiente más alta comparado con la recta predicha para los individuos de nivel socioeconómico más alto, dando cuenta de un efecto diferenciado del promedio socioeconómico de la sala de clases según el origen social del individuo. 
 
-Teniendo a la vista estos datos, cabe preguntarte entonces qué tipo de configuración de los establecimientos escolares es más deseable en lo que respecta a su composición socioecónomica. Por un lado, los datos nos inducen a pensar que una mayor heterogeneidad de los establecimientos genera un efecto agregado perjudicial sobre el rendimiento de los estudiantes. Por otro, los estudiantes más pobres mejoran más su rendimiento que los alumnos no pobres a medida que el contexto socioecónomico del colegio es más favorable. Ante esta ambivalencia, no es claro la forma en la que se debiesen distribuir los alumnos en el sistema educacional, sólo pensando en maximizar el rendimiento académico de ellos.
+Teniendo a la vista estos datos, cabe preguntarse entonces qué tipo de configuración de los establecimientos escolares es más deseable en lo que respecta a su composición socioecónomica. Por un lado, los datos nos inducen a pensar que una mayor heterogeneidad de los establecimientos genera un efecto agregado perjudicial sobre el rendimiento de los estudiantes. Por otro, los estudiantes más pobres mejoran más su rendimiento que los alumnos no pobres a medida que el contexto socioecónomico del colegio es más favorable. Ante esta ambivalencia, no es claro la forma en la que se debiesen distribuir los alumnos en el sistema educacional, sólo pensando en maximizar el rendimiento académico de ellos.
 
-###Interacción entre composición de género y sexo
+### Interacción entre composición de género y sexo
 
 ```{r, echo=FALSE, results='hide'}
 ##matematica
-results_12 = lmer(puntaje_mate ~ 1 + log(ingresos) + sexo + educacion + nacionalidad + etnia + sd_ingresos + m_educacion + sd_educacion + m_ingresos + nacionalidad_j + etnia_j + sexo_j*sexo + (1|rbd), data = data_agg)
+results_12 = lmer(puntaje_mate ~ 1 + log(ingresos) + sexo + educacion + nacionalidad + etnia + sd_ingresos + m_educacion_c + sd_educacion + m_ingresos + nacionalidad_j + etnia_j + cod_depe2 + sexo_j*sexo + (1|rbd), data = data_agg)
 
 screenreg(results_12)
 
 ##lenguaje
 
-results_15 = lmer(puntaje_leng ~ 1 + log(ingresos) + sexo + educacion + nacionalidad + etnia + sd_ingresos + m_educacion + sd_educacion + m_ingresos + nacionalidad_j + etnia_j + sexo_j*sexo + (1|rbd), data = data_agg)
+results_15 = lmer(puntaje_leng ~ 1 + log(ingresos) + sexo + educacion + nacionalidad + etnia + sd_ingresos + m_educacion_c + sd_educacion + m_ingresos + nacionalidad_j + etnia_j + cod_depe2 + sexo_j*sexo + (1|rbd), data = data_agg)
 
 screenreg(results_15)
 
@@ -736,7 +923,7 @@ screenreg(list(results_12, results_15))
 
 htmlreg(list(results_12, results_15),
     custom.model.names = c("Modelo SIMCE Matemática","Modelo SIMCE Lenguaje"),
-    custom.coef.names = c("Intercepto", "Ingresos" ,"Mujer", "Educación", "Migrante", "Indígena", "Heterogeneidad social", "Promedio nivel educativo", "Heterogeneidad educativa", "Promedio ingresos", "Homogeneidad migratoria alta", "Homogeneidad migratoria baja", "Homogeneidad étnica alta", "Homogeneidad étnica baja", "Alta homogeneidad género", "Baja homogeneidad género", "Interacción mujer homogéneo alto", "Interacción mujer homogéneo bajo"),
+    custom.coef.names = c("Intercepto", "Ingresos" ,"Mujer", "Educación", "Migrante", "Indígena", "Heterogeneidad social", "Promedio nivel educativo", "Heterogeneidad educativa", "Promedio ingresos", "Homogeneidad migratoria alta", "Homogeneidad migratoria baja", "Homogeneidad étnica alta", "Homogeneidad étnica baja", "Particular Subvencionado", "Particular Pagado", "Alta homogeneidad género", "Baja homogeneidad género", "Interacción mujer homogéneo alto", "Interacción mujer homogéneo bajo"),
     custom.note = "%stars. Errores estándar en paréntesis",
     caption="Comparación modelos con interacción sexo/composición género",
     caption.above=TRUE,
@@ -746,33 +933,59 @@ htmlreg(list(results_12, results_15),
 ```
 
 
+```{r, echo=FALSE, results='asis'}
+
+texreg(list(results_12, results_15),
+    custom.model.names = c("Modelo SIMCE Matemática","Modelo SIMCE Lenguaje"),
+    custom.coef.names = c("Intercepto", "Ingresos" ,"Mujer", "Educación", "Migrante", "Indígena", "Heterogeneidad social", "Promedio nivel educativo", "Heterogeneidad educativa", "Promedio ingresos", "Homogeneidad migratoria alta", "Homogeneidad migratoria baja", "Homogeneidad étnica alta", "Homogeneidad étnica baja", "Particular Subvecionado", "Particular Pagado", "Alta homogeneidad género", "Baja homogeneidad género", "Interacción mujer homogéneo alto", "Interacción mujer homogéneo bajo"),
+    custom.note = "%stars. Errores estándar en paréntesis",
+    caption="Comparación modelos con interacción sexo/composición género",
+    caption.above=TRUE,
+    digits=2,
+    doctype = FALSE)
+
+```
+
 Según lo discutido en el análisis de los modelos individual/grupal/multinivel se demostró que, de modo general, aquellos establecimientos con una alta proporción de mujeres tienen un mejor rendimiento académico en ambas pruebas SIMCE. Pero, con esa especificación de los modelos no es posible saber si hay un efecto diferenciado de dicha composición de género dependiendo del sexo de los estudiantes. En virtud de ello, estimamos modelos de regresión con interacción entre niveles, particularmente, entre los perfiles de establecimiento según género y el sexo de los alumnos. 
 
 Los resultados muestran, tanto para la prueba de matemática como de lenguaje, que el efecto de estar en un colegio heterogéneo para las mujeres es levemente mayor que para los hombres. Sin embargo, el efecto de un establecimiento con alta proporción de mujeres es un poco mayor para los hombres que para las mujeres (sabiendo que, a nivel agregado, es positivo para los dos) cuando los comparamos con un colegio heterogéneo.
 
 En resumen, es casi nula la diferencia del efecto de composición de género según el sexo de los alumnos, lo cual se ve respaldado en que ninguno de los coeficientes asociados a la interacción entre estas variables resulta ser significativo. Pese a ello, se confirma la hipótesis acerca de la relación entre la composición de género y el rendimiento de las mujeres, pues tanto a ellas como a los hombres les va mejor, en promedio, con una alta proporción de las primeras en el aula.
 
-###Interacción entre composición étnica e indigenas
+### Interacción entre composición étnica e indigenas
 
 ```{r, echo=FALSE, results='hide'}
 ##lenguaje
-results_13 = lmer(puntaje_leng ~ 1 + log(ingresos) + sexo + educacion + nacionalidad + etnia + sd_ingresos + m_educacion + sd_educacion + m_ingresos + nacionalidad_j + etnia_j*etnia + sexo_j + (1|rbd), data = data_agg)
+results_13 = lmer(puntaje_leng ~ 1 + log(ingresos) + sexo + educacion + nacionalidad + etnia + sd_ingresos + m_educacion_c + sd_educacion + m_ingresos + nacionalidad_j + sexo_j + cod_depe2 + etnia_j*etnia + (1|rbd), data = data_agg)
 
 screenreg(results_13)
 
 ##matematica
-results_10 = lmer(puntaje_mate ~ 1 + log(ingresos) + sexo + educacion + nacionalidad + etnia + sd_ingresos + m_educacion + sd_educacion + m_ingresos + nacionalidad_j + etnia_j*etnia + sexo_j + (1|rbd), data = data_agg)
+results_10 = lmer(puntaje_mate ~ 1 + log(ingresos) + sexo + educacion + nacionalidad + etnia + sd_ingresos + m_educacion_c + sd_educacion + m_ingresos + nacionalidad_j + sexo_j + cod_depe2 + etnia_j*etnia + (1|rbd), data = data_agg)
 
 screenreg(results_10)
 
 screenreg(list(results_10, results_13))
 ```
 
-```{r, echo=FALSE, results='asis'}
+```{r, echo=FALSE, results='hide'}
 
 htmlreg(list(results_10, results_13),
     custom.model.names = c("Modelo SIMCE Matemática","Modelo SIMCE Lenguaje"),
-    custom.coef.names = c("Intercepto", "Ingresos" ,"Mujer", "Educación", "Migrante", "Indígena", "Heterogeneidad social", "Promedio nivel educativo", "Heterogeneidad educativa", "Promedio ingresos", "Homogeneidad migratoria alta", "Homogeneidad migratoria baja", "Homogeneidad étnica alta", "Homogeneidad étnica baja", "Alta homogeneidad género", "Baja homogeneidad género", "Interacción indígena homogéneo alto", "Interacción indígena homogéneo bajo"),
+    custom.coef.names = c("Intercepto", "Ingresos" ,"Mujer", "Educación", "Migrante", "Indígena", "Heterogeneidad social", "Promedio nivel educativo", "Heterogeneidad educativa", "Promedio ingresos", "Homogeneidad migratoria alta", "Homogeneidad migratoria baja",  "Alta homogeneidad género", "Baja homogeneidad género", "Particular Subvencionado", "Particular Pagado", "Homogeneidad étnica alta", "Homogeneidad étnica baja", "Interacción indígena homogéneo alto", "Interacción indígena homogéneo bajo"),
+    custom.note = "%stars. Errores estándar en paréntesis",
+    caption="Comparación modelos con interacción indígena/composición étnica",
+    caption.above=TRUE,
+    digits=2,
+    doctype = FALSE)
+
+```
+
+```{r, echo=FALSE, results='asis'}
+
+texreg(list(results_10, results_13),
+    custom.model.names = c("Modelo SIMCE Matemática","Modelo SIMCE Lenguaje"),
+    custom.coef.names = c("Intercepto", "Ingresos" ,"Mujer", "Educación", "Migrante", "Indígena", "Heterogeneidad social", "Promedio nivel educativo", "Heterogeneidad educativa", "Promedio ingresos", "Homogeneidad migratoria alta", "Homogeneidad migratoria baja",  "Alta homogeneidad género", "Baja homogeneidad género", "Particular Subvencionado", "Particular Pagado", "Homogeneidad étnica alta", "Homogeneidad étnica baja", "Interacción indígena homogéneo alto", "Interacción indígena homogéneo bajo"),
     custom.note = "%stars. Errores estándar en paréntesis",
     caption="Comparación modelos con interacción indígena/composición étnica",
     caption.above=TRUE,
@@ -786,32 +999,47 @@ La interacción entre la composición étnica y el origen étnico de los estudia
 
 De esta forma, si bien a la luz de los resultados empíricos aquí obtenidos sabemos que los colegios con alta proporción étnica (u homogeneidad étnica alta) tienen un efecto positivo y significativo en comparación a los heterogeneos y con baja homogeneidad étnica en ambas pruebas SIMCE, el efecto en cuestión no difiere significativamente si se trata de un índigena o no.
 
-###Interacción entre composición migratoria y migrantes
+### Interacción entre composición migratoria y migrantes
 
 ```{r, echo=FALSE, results='hide'}
 ##lenguaje
 
-results_14 = lmer(puntaje_leng ~ 1 + log(ingresos) + sexo + educacion + nacionalidad + etnia + sd_ingresos + m_educacion + sd_educacion + m_ingresos + nacionalidad_j*nacionalidad + etnia_j + sexo_j + (1|rbd), data = data_agg)
+results_14 = lmer(puntaje_leng ~ 1 + log(ingresos) + sexo + educacion + nacionalidad + etnia + sd_ingresos + m_educacion_c + sd_educacion + m_ingresos + etnia_j + sexo_j + cod_depe2 + nacionalidad_j*nacionalidad + (1|rbd), data = data_agg)
 
 screenreg(results_14)
 
 ##matematica
-results_11 = lmer(puntaje_mate ~ 1 + log(ingresos) + sexo + educacion + nacionalidad + etnia + sd_ingresos + m_educacion + sd_educacion + m_ingresos + nacionalidad_j*nacionalidad + etnia_j + sexo_j + (1|rbd), data = data_agg)
+results_11 = lmer(puntaje_mate ~ 1 + log(ingresos) + sexo + educacion + nacionalidad + etnia + sd_ingresos + m_educacion_c + sd_educacion + m_ingresos + etnia_j + sexo_j + cod_depe2 + nacionalidad_j*nacionalidad  + (1|rbd), data = data_agg)
 
 screenreg(results_11)
 
+screenreg(list(results_11, results_14))
+
 ```
 
-```{r, echo=FALSE, results='asis'}
+```{r, echo=FALSE, results='hide'}
 
 htmlreg(list(results_11, results_14),
     custom.model.names = c("Modelo SIMCE Matemática","Modelo SIMCE Lenguaje"),
-    custom.coef.names = c("Intercepto", "Ingresos" ,"Mujer", "Educación", "Migrante", "Indígena", "Heterogeneidad social", "Promedio nivel educativo", "Heterogeneidad educativa", "Promedio ingresos", "Homogeneidad migratoria alta", "Homogeneidad migratoria baja", "Homogeneidad étnica alta", "Homogeneidad étnica baja", "Alta homogeneidad género", "Baja homogeneidad género", "Interacción migrante homogéneo alto", "Interacción migrante homogéneo bajo"),
+    custom.coef.names = c("Intercepto", "Ingresos" ,"Mujer", "Educación", "Migrante", "Indígena", "Heterogeneidad social", "Promedio nivel educativo", "Heterogeneidad educativa", "Promedio ingresos",  "Homogeneidad étnica alta", "Homogeneidad étnica baja", "Alta homogeneidad género", "Baja homogeneidad género", "Particular Subvencionado", "Particular Pagado", "Homogeneidad migratoria alta", "Homogeneidad migratoria baja", "Interacción migrante homogéneo alto", "Interacción migrante homogéneo bajo"),
     custom.note = "%stars. Errores estándar en paréntesis",
     caption="Comparación modelos con interacción migrante/composición migratoria",
     caption.above=TRUE,
     digits=2,
     doctype = FALSE)
+
+```
+
+```{r, echo=FALSE, results='asis'}
+texreg(list(results_11, results_14),
+    custom.model.names = c("Modelo SIMCE Matemática","Modelo SIMCE Lenguaje"),
+    custom.coef.names = c("Intercepto", "Ingresos" ,"Mujer", "Educación", "Migrante", "Indígena", "Heterogeneidad social", "Promedio nivel educativo", "Heterogeneidad educativa", "Promedio ingresos",  "Homogeneidad étnica alta", "Homogeneidad étnica baja", "Alta homogeneidad género", "Baja homogeneidad género", "Particular Subvencionado", "Particular Pagado", "Homogeneidad migratoria alta", "Homogeneidad migratoria baja", "Interacción migrante homogéneo alto", "Interacción migrante homogéneo bajo"),
+    custom.note = "%stars. Errores estándar en paréntesis",
+    caption="Comparación modelos con interacción migrante/composición migratoria",
+    caption.above=TRUE,
+    digits=2,
+    doctype = FALSE)
+
 
 ```
 
@@ -821,11 +1049,9 @@ Por último, acerca de la interacción entre la composición migratoria y el est
 Pese a lo anterior, es importante subrayar que los coeficientes asociados a la interacciones estimadas no son significativos estadísticamente, razón por la cual la interpretación aquí ofrecida sólo tiene sentido a nivel muestral (que, por cierto, se parece a la población por tratarse de una muestra muy grande).
 
 
+# Discusión de los resultados
 
-
-#Discusión de los resultados
-
-##Retomando las hipótesis de investigación
+## Retomando las hipótesis de investigación
 
 La discusión acerca del fenómeno de la segregación social y, más especificamente, de la composición de los establecimientos escolares es fundamental en nuestro país, cuyo contexto educativo exhibe altos niveles de discriminación, estratificación, y segmentación sociocultural de sus estudiantes. En estas circunstancias, nos preguntamos por la relación que hay en el sistema educacional chileno entre, por un lado, el grado de heterogeneidad de la composición escolar y los resultados en la prueba SIMCE de matemática y lenguaje. 
 
@@ -849,7 +1075,7 @@ Asimismo, un resultado que confirma la hipótesis de trabajo pero que no está e
 
 Por último, la relación del contexto socioeconómico de la sala de clases y el rendimiento de los alumnos más pobres es difusa. Aun cuando la heterogeneidad socioeconómica del colegio impacta negativamente en el rendimiento académico de los estudiantes, los estudiantes más pobres se ven más beneficiados, considerablmente, de establecimientos escolares con un nivel de ingreso más alto. De esta forma, no es claro si es conveniente, desde una perspectiva descriptiva (es decir, sólo decidiendo a partir de los resultados empíricos exhibidos en SIMCE), una mayor mixtura al interior de los colegios.  
 
-##Limitaciones del estudio
+## Limitaciones del estudio
 
 La investigación desarrollada tiene varias limitaciones sumamente relevante de mencionar y a corregir en investigaciones futuras. En primer lugar, los datos con los que se trabajan podrían tener un sesgo significativo en la medida que sólo se trabaja con 148 mil (aproximadamente) de los 270 mil alumnos que rindieron el SIMCE de II medio el año 2017. De todas formas, el tamaño de la muestra alcanzada es grande y, también, la distribución empírica de algunas variables (por ejemplo del ingreso per cápita) se asemeja a lo que ocurre efectivamente en la población chilena (dando luces de que dicho sesgo bien podría ser inexistente).
 
@@ -859,7 +1085,7 @@ En tercer lugar, es posible que hayan variables fundamentales no incluidas que p
 
 En cuarto lugar, la forma de construcción del nivel socioecónomico se hizo sólo a partir de los ingresos, pues nos encontramos delimitados por los datos que no tenían más preguntas de caracterización socioecónomica que hubiesen servido para medir de manera más multidimensional dicho constructo.
 
-##Investigaciones futuras
+## Investigaciones futuras
 
 La investigación desarrollada significa una contribución importante en materia de composición escolar y la relación que tiene sus distintas formas de distribución en el rendimiento acádemico. No obstante, el proceso educativo no sólo abarca el cultivo de aptitudes cognitivas de los estudiantes. Por ello, investigaciones futuras debiesen evaluar la relación del fenomeno de la composición escolar con el ambiente generado en la sala, la motivación de los estudiantes, y el desarrollo psicosocial de los alumnos. En medio de un escenario educativo de fragmentación ecónomica, social, y cultural, es fundamental conocer los impactos que ello tiene en la formación de los estudiantes chilenos.
 
@@ -875,7 +1101,7 @@ Finalmente, destacar la imperiosa necesidad de seguir falseando y contrastando l
 
 
 
-#Bibliografía
+# Bibliografía
 
 
 

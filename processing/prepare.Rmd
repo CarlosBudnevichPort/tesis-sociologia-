@@ -22,6 +22,8 @@ padres<- read_dta("input/data/original/simce2m2017_cpad_publica.dta")
 
 alumnos<- read_dta("input/data/original/simce2m2017_alu_publica_final.dta")
 
+colegios<-read_dta("input/data/original/simce2m2017_rbd_publica_final.dta")
+
 ##Unimos ambas bases de datos para simplificar trabajo
 
 proc=merge(padres, alumnos, by="idalumno")
@@ -244,7 +246,7 @@ proc$nacionalidad= recode(proc$nacionalidad, "2=NA")
 
 proc$cultura= recode(proc$cultura, "2=NA")
 
-data= proc %>% select(rbd, puntaje_leng, puntaje_mate, ingresos, ingresos_t, sexo, cultura, educacion, nacionalidad, etnia)
+data= proc %>% select(rbd, puntaje_leng, puntaje_mate, ingresos, sexo, cultura, educacion, nacionalidad, etnia)
 
 data= na.omit(data)
 
@@ -263,9 +265,7 @@ data_agg= data %>%
   mutate(p_nacionalidad = mean(nacionalidad==1)) %>%
   mutate(p_etnia = mean(etnia==1)) %>%
   mutate(m_educacion = mean(educacion)) %>%
-  mutate(sd_educacion = sd(educacion)) %>% 
-  mutate(sd_ingresos_t = sd(ingresos_t)) %>% 
-  mutate(m_ingresos_t = mean(ingresos_t)) %>% as.data.frame()
+  mutate(sd_educacion = sd(educacion)) %>% as.data.frame()
   
 
 stargazer(data_agg, type="text")
