@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Composición de las escuelas y rendimiento académico</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Carlos Budnevich" />
+    <script src="libs/fabric/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <link rel="stylesheet" href="docs/xaringan/ath-slides.css" type="text/css" />
+    <link rel="stylesheet" href="docs/xaringan/xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+
+
+class: inverse middle center
+
+# **Composición social de las escuelas y rendimiento académico** 
+
+.class-info[
+*Defensa de tesis para optar al grado de Sociólogo*
+]
+
+Carlos Budnevich Portales 
+
+&lt;/br&gt;
+
+
+Profesor guía: Dr. Juan Carlos Castillo
+
+Comisión: Dra. Lorena Ortega y Dra. (c) Andrea Greibe
+
+Facultad de Ciencias Sociales, Universidad de Chile
+
+Junio 2021
+
+---
+
+#Programa de hoy
+
+- ¿Por qué estudiar la composición escolar?
+
+- Problema de investigación
+
+- Pregunta de investigación
+
+- Revisión de literatura
+
+- Hipótesis de investigación
+
+- Datos, variables, método
+
+- Análisis descriptivo
+
+- Gráficos bivariados
+
+- Modelos 
+
+- Discusión de resultados
+
+- Conclusión
+
+- Comentarios comisión
+
+---
+
+class: roja middle center 
+
+# ¿Por qué estudiar la composición escolar?
+
+---
+
+# ¿Por qué estudiar la composición escolar?
+
+
+- Chile como caso particular de estudio debido a su sistema educacional muy segregado (Bellei, 2007, 2013; Bellei, 2015; Contreras et al., 2010; Garcia-Huidobro, 2007; Treviño et al., 2014; Valenzuela et al., 2008)
+ 
+
+&lt;/br&gt;
+
+- La importancia de una educación más igualitaria e inclusiva (Valenzuela et al., 2008; Villalobos et al., 2020; van de Werfhorst, 2014)
+
+&lt;/br&gt;
+
+- Contexto de grandes transformaciones estructurales del sistema educativo: Sistema de admisión escolar (SAE) y ley de Nueva Educación Pública (Carrasco &amp; Flores, 2019; Bellei et al., 2018)
+
+
+---
+# Desigualdades académicas 
+
+  **Gráfico 1: Estratificación del rendimiento académico**
+![](input/images/brecha_mate_simce2018.png)
+.small[        Fuente: Informe MINEDUC 2018
+] 
+
+
+---
+# Brechas de género
+
+.pull-left[
+**Gráfico 2: Brechas de género prueba TIMSS matemática**
+![:scale 90%](input/images/brecha_gen_mate_timss.jpg)
+.small[Fuente: Informe Agencia de calidad de la&amp;nbsp;Educación 2015
+]
+]
+
+.pull-right[
+.very-big[
+- Tanto hombres como mujeres han mejorado sistematicamente su rendimiento
+
+- Diferencias persistentes en el tiempo
+
+- Cabe preguntar por las razones detrás de esta amplia brecha
+]
+]
+---
+# Nuestro sistema educacional
+
+.pull-left[
+
+**Gráfico 3: Segregación socioeconómica por ingreso**
+![](input/images/evolucion_segregacion_quintiles.jpg)
+
+Fuente: Extraído de Murillo et. al (2018)
+]
+
+--
+
+.pull-right[
+
+**Gráfico 4: Inclusión social de países OCDE**
+![](input/images/inclusion_social.jpg)
+Fuente: Extraído de Bellei (2013)
+
+]
+
+---
+class: inverse center middle
+
+#  ¿En qué medida la heterogeneidad de la composición escolar, en términos socioeconómicos, de género, étnicos, y nacionalidad, se relaciona con los resultados obtenidos por mujeres, indígenas, migrantes, e individuos de bajo nivel socioeconómico en la prueba SIMCE 2017 de matemática y lenguaje?
+
+---
+# Revisión de literatura 
+
+- Según las investigaciones en nuestro país la heterogeneidad socioeconómica tendría un efecto positivo en el rendimiento (Mizala &amp; Torche, 2012; Valenzuela et al.,
+2008; Taut &amp; Escobar, 2012; Ortiz, 2015), conclusiones algo diferentes en la experiencia internacional  (Nash &amp; Harker, 1997; Nash, 2003; Sammons et al., 1997)
+
+--
+
+- No son unívocos los resultados de investigaciones acerca de cómo influye el ordenamiento de género de los establecimientos. Algunos estudios muestran lo beneficioso de la mixtura (Hoxby, 2000) y otros descartan este efecto (Paredes, 2018; Bertrand, 2011; Dumay &amp; Dupriez, 2008)
+
+--
+
+- En general, se ha documentado amplias diferencias academicas entre poblacion mapuche y no mapuche, donde podemos mencionar investigaciones como la de Undurraga (2014), Cerda (2009), McEwan (2004), y Canales &amp; Webb (2018).
+
+--
+
+- En términos de nacionalidad, la evidencia internacional es más bien ambivalente (Driessen (2001); Dronkers &amp; Levels (2007); Szulkin &amp; Jonsson (2007); van Ewijk &amp; Sleegers (2009); Van Houtte &amp; Stevens (2010); Agirdag et al. (2012) y la nacional no se ha ocupado directamente de la composición migratoria de las escuelas y rendimiento pero sí de otros elementos (Ortega et al., 2020)
+
+---
+# Hipótesis de investigación 
+
+(1) Los alumnos de niveles socioeconómicos más bajos se ven más favorecidos de establecimientos heterogéneos socioeconómicamente que aquellos alumnos de niveles socioeconómicos más altos
+
+--
+
+(2) Las mujeres se ven beneficiadas en términos del rendimiento que tienen en matemática cuando se encuentran en colegios no mixtos, mientras en lenguaje no hay un efecto significativo de una composición de estas características
+
+--
+
+(3) Los indígenas y migrantes obtienen mejores resultados cuando se encuentran mezclados con individuos de origen étnico y nacionalidad diverso que cuando están homogéneamente concentrados
+
+---
+
+# Datos y variables
+.tiny[
+|Variable| Descripción | Categorías de respuesta | Fuente de información |
+|----------|---------|--------|---------|
+|           |**Variable&amp;nbsp;dependiente**| | | 
+| Prueba SIMCE| Puntaje SIMCE Mat. y Leng.  | 100-400 ptos. | Simce (2017)|
+|           |**Variables&amp;nbsp;independientes L1**| | | |
+| Ingresos del hogar per cápita | Ingresos líquidos mensuales/miembros del hogar| Desde $5 mil hasta 1,5 mill. | Simce (2017)|
+|Sexo| Sexo del estudiante|  1:Mujer &lt;/br&gt; 0: Hombre| Simce (2017)| 
+|Etnia| Origen étnico del estudiante/familia| 1:Indígena  &lt;/br&gt; 0: No indígena| Simce (2017)|
+|Nacionalidad| Nacionalidad del estudiante/familia| 1: Migrante  &lt;/br&gt; 0: No migrante| Simce (2017)|
+|           |**Variables&amp;nbsp;independientes L2**| | | |
+| Heterogeneidad socioeconómica| Desviación estandar de ingresos II medio| Desde $8.333 a $822.268| Simce (2017)|
+| Composición de género| Perfiles de establecimiento según método de Jenks| Alta homogeneidad  &lt;/br&gt; Heterogeneidad  &lt;/br&gt; Baja homogeneidad| Simce (2017)| 
+| Composición étnica| Perfiles de establecimientos según método de Jenks| Alta homogeneidad  &lt;/br&gt; Heterogeneidad  &lt;/br&gt; Baja homogeneidad| Simce (2017)| 
+| Composición migratoria| Perfiles de establecimientos según método de Jenks| Alta homogeneidad  &lt;/br&gt; Heterogeneidad  &lt;/br&gt; Baja homogeneidad| Simce (2017)| 
+]
+
+
+---
+# Analisis descriptivo 
+
+
+.pull-left[
+.tiny[
+
+&lt;table style="text-align:center"&gt;&lt;caption&gt;&lt;strong&gt;Tabla 2: Descriptivos nivel estudiante&lt;/strong&gt;&lt;/caption&gt;
+&lt;tr&gt;&lt;td colspan="7" style="border-bottom: 1px solid black"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style="text-align:left"&gt;Statistic&lt;/td&gt;&lt;td&gt;N&lt;/td&gt;&lt;td&gt;Mean&lt;/td&gt;&lt;td&gt;St. Dev.&lt;/td&gt;&lt;td&gt;Median&lt;/td&gt;&lt;td&gt;Min&lt;/td&gt;&lt;td&gt;Max&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td colspan="7" style="border-bottom: 1px solid black"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style="text-align:left"&gt;rbd&lt;/td&gt;&lt;td&gt;147,979&lt;/td&gt;&lt;td&gt;11,308.480&lt;/td&gt;&lt;td&gt;8,821.320&lt;/td&gt;&lt;td&gt;9,356&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;40,457&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;puntaje_leng&lt;/td&gt;&lt;td&gt;147,979&lt;/td&gt;&lt;td&gt;254.803&lt;/td&gt;&lt;td&gt;51.122&lt;/td&gt;&lt;td&gt;255.410&lt;/td&gt;&lt;td&gt;116.780&lt;/td&gt;&lt;td&gt;397.290&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;puntaje_mate&lt;/td&gt;&lt;td&gt;147,979&lt;/td&gt;&lt;td&gt;270.224&lt;/td&gt;&lt;td&gt;63.388&lt;/td&gt;&lt;td&gt;272.480&lt;/td&gt;&lt;td&gt;96.590&lt;/td&gt;&lt;td&gt;428.040&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;ingresos&lt;/td&gt;&lt;td&gt;147,979&lt;/td&gt;&lt;td&gt;167,611.400&lt;/td&gt;&lt;td&gt;185,102.600&lt;/td&gt;&lt;td&gt;110,000&lt;/td&gt;&lt;td&gt;5,000&lt;/td&gt;&lt;td&gt;1,500,000&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;sexo&lt;/td&gt;&lt;td&gt;147,979&lt;/td&gt;&lt;td&gt;0.511&lt;/td&gt;&lt;td&gt;0.500&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;cultura&lt;/td&gt;&lt;td&gt;147,979&lt;/td&gt;&lt;td&gt;0.211&lt;/td&gt;&lt;td&gt;0.408&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;educacion&lt;/td&gt;&lt;td&gt;147,979&lt;/td&gt;&lt;td&gt;12.230&lt;/td&gt;&lt;td&gt;2.605&lt;/td&gt;&lt;td&gt;12&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;17&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;nacionalidad&lt;/td&gt;&lt;td&gt;147,979&lt;/td&gt;&lt;td&gt;0.045&lt;/td&gt;&lt;td&gt;0.207&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;etnia&lt;/td&gt;&lt;td&gt;147,979&lt;/td&gt;&lt;td&gt;0.174&lt;/td&gt;&lt;td&gt;0.379&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td colspan="7" style="border-bottom: 1px solid black"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+Fuente: Elaboración propia en base a datos SIMCE 2017
+]
+]
+
+
+
+
+
+.pull-right[
+.tiny[
+
+&lt;table style="text-align:center"&gt;&lt;caption&gt;&lt;strong&gt;Tabla 3: Descriptivos de establecimientos&lt;/strong&gt;&lt;/caption&gt;
+&lt;tr&gt;&lt;td colspan="7" style="border-bottom: 1px solid black"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style="text-align:left"&gt;Statistic&lt;/td&gt;&lt;td&gt;N&lt;/td&gt;&lt;td&gt;Mean&lt;/td&gt;&lt;td&gt;St. Dev.&lt;/td&gt;&lt;td&gt;Median&lt;/td&gt;&lt;td&gt;Min&lt;/td&gt;&lt;td&gt;Max&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td colspan="7" style="border-bottom: 1px solid black"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style="text-align:left"&gt;rbd&lt;/td&gt;&lt;td&gt;2,901&lt;/td&gt;&lt;td&gt;12,501.210&lt;/td&gt;&lt;td&gt;9,067.806&lt;/td&gt;&lt;td&gt;10,397&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;40,457&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;puntaje_leng&lt;/td&gt;&lt;td&gt;2,901&lt;/td&gt;&lt;td&gt;253.855&lt;/td&gt;&lt;td&gt;29.178&lt;/td&gt;&lt;td&gt;252.732&lt;/td&gt;&lt;td&gt;162.787&lt;/td&gt;&lt;td&gt;341.258&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;puntaje_mate&lt;/td&gt;&lt;td&gt;2,901&lt;/td&gt;&lt;td&gt;266.914&lt;/td&gt;&lt;td&gt;45.464&lt;/td&gt;&lt;td&gt;262.474&lt;/td&gt;&lt;td&gt;149.315&lt;/td&gt;&lt;td&gt;391.631&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;ingresos&lt;/td&gt;&lt;td&gt;2,901&lt;/td&gt;&lt;td&gt;189,251.600&lt;/td&gt;&lt;td&gt;161,706.800&lt;/td&gt;&lt;td&gt;121,600.000&lt;/td&gt;&lt;td&gt;8,333.333&lt;/td&gt;&lt;td&gt;822,268.900&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;sexo&lt;/td&gt;&lt;td&gt;2,901&lt;/td&gt;&lt;td&gt;0.510&lt;/td&gt;&lt;td&gt;0.183&lt;/td&gt;&lt;td&gt;0.511&lt;/td&gt;&lt;td&gt;0.000&lt;/td&gt;&lt;td&gt;1.000&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;cultura&lt;/td&gt;&lt;td&gt;2,901&lt;/td&gt;&lt;td&gt;0.212&lt;/td&gt;&lt;td&gt;0.169&lt;/td&gt;&lt;td&gt;0.167&lt;/td&gt;&lt;td&gt;0.000&lt;/td&gt;&lt;td&gt;1.000&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;educacion&lt;/td&gt;&lt;td&gt;2,901&lt;/td&gt;&lt;td&gt;12.339&lt;/td&gt;&lt;td&gt;1.671&lt;/td&gt;&lt;td&gt;12.333&lt;/td&gt;&lt;td&gt;5.000&lt;/td&gt;&lt;td&gt;16.000&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;nacionalidad&lt;/td&gt;&lt;td&gt;2,901&lt;/td&gt;&lt;td&gt;0.049&lt;/td&gt;&lt;td&gt;0.075&lt;/td&gt;&lt;td&gt;0.024&lt;/td&gt;&lt;td&gt;0.000&lt;/td&gt;&lt;td&gt;0.778&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;etnia&lt;/td&gt;&lt;td&gt;2,901&lt;/td&gt;&lt;td&gt;0.170&lt;/td&gt;&lt;td&gt;0.166&lt;/td&gt;&lt;td&gt;0.122&lt;/td&gt;&lt;td&gt;0.000&lt;/td&gt;&lt;td&gt;1.000&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td colspan="7" style="border-bottom: 1px solid black"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+Fuente: Elaboración propia en base a datos SIMCE 2017
+]
+]
+
+---
+# Distribución de tipos de establecimientos
+
+
+
+.pull-left[
+.tiny[
+![](prueba1_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+
+Fuente: Elaboración propia en base a datos SIMCE 2017
+]
+]
+
+
+.pull-right[
+.tiny[
+![](prueba1_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+
+Fuente: Elaboración propia en base a datos SIMCE 2017 
+]
+]
+---
+#Distribución de tipos de establecimientos
+
+.pull-left[
+.tiny[
+![](prueba1_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+
+Fuente: Elaboración propia en base a datos SIMCE 2017
+]
+]
+
+.pull-right[
+- Se puede apreciar de forma más precisa la composición de los establecimientos según las diferentes variables consideradas 
+
+- Por una parte, es posible advertir una clara mixtura en lo que refiere a la composición de género de los colegios
+
+- Por otra, en el caso de migrante e indigenas es más bien poco frecuente una mayor mixtura e interacción cultural/étnica
+
+]
+
+---
+# Gráficos bivariados 
+
+.pull-left[
+.tiny[
+**Gráfico 8: Puntaje SIMCE colegios según promedio educacional**
+
+![](prueba1_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+
+Fuente: Elaboración propia en base a datos SIMCE 2017
+
+]
+]
+
+.pull-right[
+.tiny[
+
+**Gráfico 9: Puntaje SIMCE colegios según promedio de ingresos** 
+
+![](prueba1_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+
+Fuente: Elaboración propia en base a datos SIMCE 2017
+
+]
+]
+
+---
+class: roja middle center 
+
+# Modelos
+
+---
+
+
+
+.pull-left[
+.tiny[
+&lt;table class="texreg" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;color: #000000;border-top: 2px solid #000000;"&gt;
+&lt;caption&gt;Comparación modelos SIMCE Matemática&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/th&gt;
+&lt;th style="padding-left: 5px;padding-right: 5px;"&gt;Individual&lt;/th&gt;
+&lt;th style="padding-left: 5px;padding-right: 5px;"&gt;Multinivel&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr style="border-top: 1px solid #000000;"&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Intercepto&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;198.35 (2.24)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;179.77 (4.29)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Ingresos&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;4.05 (0.19)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;3.15 (0.19)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Mujer&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;-5.45 (0.26)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;-5.67 (0.26)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Educación&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;1.97 (0.06)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;1.80 (0.06)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Migrante&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;3.04 (0.62)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;2.94 (0.62)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Indígena&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;0.09 (0.35)&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;0.33 (0.35)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Promedio ingresos&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;0.82 (0.15)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Heterogeneidad educativa&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;3.17 (0.85)&lt;sup&gt;*&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Heterogeneidad social&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;-0.42 (1.35)&lt;sup&gt;**&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Promedio nivel educativo&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;15.10 (0.12)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Homogeneidad migratoria alta&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;-13.26 (1.34)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Homogeneidad migratoria baja&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;9.29 (3.17)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Homogeneidad étnica alta&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;7.20 (2.01)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Homogeneidad étnica baja&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;3.24 (2.08)&lt;sup&gt;**&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Alta homogeneidad género&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;3.16 (1.38)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Baja homogeneidad género&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;-10.07 (2.01)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Particular subvencionado&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;10.24 (1.36)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Particular pagado&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;-5.60 (3.75)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr style="border-top: 1px solid #000000;"&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;AIC&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;1567692.29&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;1565439.66&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;BIC&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;1567771.52&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;1565637.76&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr style="border-bottom: 2px solid #000000;"&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Log Likelihood&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;-783838.14&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;-782699.83&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;tfoot&gt;
+&lt;tr&gt;
+&lt;td style="font-size: 0.8em;" colspan="3"&gt;&lt;sup&gt;***&lt;/sup&gt;p &amp;lt; 0.001; &lt;sup&gt;**&lt;/sup&gt;p &amp;lt; 0.01; &lt;sup&gt;*&lt;/sup&gt;p &amp;lt; 0.05. Errores estándar en paréntesis&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tfoot&gt;
+&lt;/table&gt;
+]
+]
+
+
+--
+
+.pull-right[
+.tiny[
+&lt;table class="texreg" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;color: #000000;border-top: 2px solid #000000;"&gt;
+&lt;caption&gt;Comparación modelos SIMCE Lenguaje&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/th&gt;
+&lt;th style="padding-left: 5px;padding-right: 5px;"&gt;Individual&lt;/th&gt;
+&lt;th style="padding-left: 5px;padding-right: 5px;"&gt;Multinivel&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr style="border-top: 1px solid #000000;"&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Intercepto&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;194.43 (1.97)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;191.48 (3.38)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Ingresos&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;2.80 (0.17)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;1.85 (0.18)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Mujer&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;15.01 (0.24)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;14.75 (0.24)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Educación&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;1.58 (0.05)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;1.39 (0.05)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Migrante&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;1.18 (0.57)&lt;sup&gt;*&lt;/sup&gt;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;1.18 (0.57)&lt;sup&gt;*&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Indígena&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;0.22 (0.32)&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;0.46 (0.32)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Promedio ingresos&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;0.42 (0.11)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Heterogeneidad educativa&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;1.80 (0.63)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Heterogeneidad social&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;-0.32 (1.01)&lt;sup&gt;**&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Promedio nivel educativo&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;8.74 (0.09)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Homogeneidad migratoria alta&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;-8.03 (0.99)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Homogeneidad migratoria baja&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;7.34 (2.36)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Homogeneidad étnica alta&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;6.03 (1.48)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Homogeneidad étnica baja&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;1.52 (1.53)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Alta homogeneidad género&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;2.32 (1.02)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Baja homogeneidad género&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;-6.93 (1.48)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Particular subvencionado&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;4.30 (1.00)&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Particular pagado&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;-5.16 (2.79)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr style="border-top: 1px solid #000000;"&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;AIC&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;1540411.99&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;1539097.85&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;BIC&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;1540491.23&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;1539295.95&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr style="border-bottom: 2px solid #000000;"&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;Log Likelihood&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;-770197.99&lt;/td&gt;
+&lt;td style="padding-left: 5px;padding-right: 5px;"&gt;-769528.93&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;tfoot&gt;
+&lt;tr&gt;
+&lt;td style="font-size: 0.8em;" colspan="3"&gt;&lt;sup&gt;***&lt;/sup&gt;p &amp;lt; 0.001; &lt;sup&gt;**&lt;/sup&gt;p &amp;lt; 0.01; &lt;sup&gt;*&lt;/sup&gt;p &amp;lt; 0.05. Errores estándar en paréntesis&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tfoot&gt;
+&lt;/table&gt;
+]
+]
+
+---
+# Gráficos de interacción
+
+--
+
+
+
+.pull-left[
+![](prueba1_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+![](prueba1_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
+]
+---
+# Discusión de los resultados
+
+ - Composición socioeconómica 
+ - Composición de género
+ - Composición étnica/migrante
+ 
+## Y... la literatura?
+
+ - Cierta inconsistencia con lo hallado por otros autores (Mizala &amp; Torche, 2012; Ortiz, 2015; Taut &amp; Escobar, 2012) pero también quedan preguntas abiertas
+ - Por un lado, investigaciones como la de Paredes (2018) muestran beneficios para mujeres de no-mixtura y Villalobos et al. (2016) ausencia de diferencias de rendimiento según tipo de composición
+ - En términos étnicos, tenemos resultados diferentes a Canales &amp; Webb (2018) pues colegios heterogéneos siempre serían peores pero similares a evidencia internacional ((Merry &amp; Driessen, 2012; Dronkers &amp; van der Velden, 2013)
+ - En relación con composición migratoria se alinea con varios resultados hallados en perspectiva comparada (Szulkin &amp; Jonsson, 2007; Contini, 2013)
+
+
+
+
+---
+
+# Conclusiones 
+
+- Relevancia del estudio de la composición escolar por razones tanto normativas como contextuales
+
+- Una dimensión importante del proceso educativo son las habilidades cognitivas, dentro de muchas otras 
+
+- La relación entre heterogeneidad y rendimiento académico asume sentidos y direcciones diversas
+
+- Recomendaciones de política pública de acuerdo con los resultados obtenidos
+
+- Evidencia internacional como referencia de sistemas educacionales igualitarios y de calidad
+
+
+---
+
+# Comentarios Prof. Greibe
+
+- Sobre factores que tienen mayor incidencia en la elección de escuela de familias chilenas (Carrasco &amp; Flores, 2019, Canales et al., 2020) 
+
+- Funcionamiento de la segregación según nivel de estratificación del sistema educacional (Dronkers &amp; van der Velden, 2013) 
+
+- Importancia de una educación más igualitaria e inclusiva (Valenzuela et al., 2008; Villalobos et al., 2020; van de Werfhorst, 2014)
+
+---
+
+# Comentarios Prof. Ortega
+
+- No estandarización de los coeficientes por exceder delimitación de la investigación y por tener variables categóricas (Cohen et al., 2020)
+
+- No hay casos influyentes siguiendo el criterio de `\(4/n\)` usando la métrica de distancia de Cook 
+
+- Ajuste comparativo de los modelos  
+
+- Algunos antecedentes sobre la oleada migratoria en Chile y su relación con los hallazgos (INE, 2017)
+
+
+---
+class: inverse middle center
+
+# **Composición social de las escuelas y rendimiento académico** 
+
+.class-info[
+*Defensa de tesis para optar al grado de Sociólogo*
+]
+
+Carlos Budnevich Portales 
+
+&lt;/br&gt;
+
+
+Profesor guía: Dr. Juan Carlos Castillo
+
+Comisión: Dra. Lorena Ortega y Dra. (c) Andrea Greibe
+
+Facultad de Ciencias Sociales, Universidad de Chile
+
+Junio 2021
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="docs/xaringan/macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
